@@ -23,10 +23,6 @@ namespace WGUCapstoneProject
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show("Hello World");
-            MessageBox.Show("JK, hello Github");
-            MessageBox.Show("Jkjk, hello noone");
-            MessageBox.Show("Merge Worked");
         }
     }
 }
