@@ -47,16 +47,16 @@ namespace WGUCapstoneProject.AppViews
             postageDataGrid.ItemsSource = PostageList;
         }
 
-        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
             ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
             Close();
             viewPostageWindow.Show();
         }
 
-        private void btnDeleteOne_Click(object sender, RoutedEventArgs e)
+        private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
-            PostageList.Remove(PostageList[1]);
+            PostageList.Remove(PostageList[postageDataGrid.SelectedIndex]);
             postageDataGrid.ItemsSource = PostageList;
         }
     }

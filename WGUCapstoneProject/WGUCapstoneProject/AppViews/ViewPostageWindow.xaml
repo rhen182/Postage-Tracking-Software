@@ -50,14 +50,14 @@
             Grid.Column="2" Grid.Row="2"
             x:Name="btnDeleteOne"
             Content="Delete One"
-            Click="btnDeleteOne_Click"
+            Click="BtnDeleteOne_Click"
         ></Button>
         <!--Row 3-->
         <Button
             Grid.Column="1" Grid.Row="3"
             x:Name="btnRefresh"
             Content="Refresh"
-            Click="btnRefresh_Click"
+            Click="BtnRefresh_Click"
         ></Button>
     </Grid>
 </Window>
