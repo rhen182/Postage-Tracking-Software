@@ -1,0 +1,50 @@
+﻿<Window x:Class="WGUCapstoneProject.AppViews.ViewPostageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WGUCapstoneProject.AppViews"
+        mc:Ignorable="d"
+        Title="ViewPostageWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+
+        <!--Row 1-->
+        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sender" Binding="{Binding Sender}"/>
+                <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>
+                <DataGridTextColumn Header="Recipient" Binding="{Binding Recipient}"/>
+                <DataGridTextColumn Header="Organization" Binding="{Binding Organization}"/>
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}"/>
+                <DataGridTextColumn Header="Postage Type" Binding="{Binding PostageType}"/>
+                <DataGridTextColumn Header="Date Sent" Binding="{Binding DateSent}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--Row 2-->
+        <Button
+            Grid.Column="1" Grid.Row="2"
+            x:Name="btnDelete"
+            Content="Delete"
+            Click="btnDelete_Click"
+        ></Button>
+    </Grid>
+</Window>

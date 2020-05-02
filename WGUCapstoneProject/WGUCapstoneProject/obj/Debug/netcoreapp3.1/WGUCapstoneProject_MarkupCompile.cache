@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\App.xaml
-11151548125
+31610527829
 
-3-917710711
+16224283353
 1921654412462
-MainWindow.xaml;
+AppViews\ViewPostageWindow.xaml;MainWindow.xaml;PlaygroundViews\DataBindingWindow.xaml;
 
 False
 
