@@ -24,6 +24,7 @@ namespace WGUCapstoneProject
         {
             InitializeComponent();
             MessageBox.Show("Hello World");
+            MessageBox.Show("JK, hello Github");
         }
     }
 }
