@@ -23,6 +23,7 @@ namespace WGUCapstoneProject
         public MainWindow()
         {
             InitializeComponent();
+            MessageBox.Show("one more test");
         }
     }
 }
