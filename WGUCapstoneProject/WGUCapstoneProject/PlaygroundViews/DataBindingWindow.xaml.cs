@@ -39,3 +39,4 @@ namespace WGUCapstoneProject.PlaygroundViews
             destinationTextBlock.SetBinding(TextBlock.TextProperty, binding);
         }
     }
+}
