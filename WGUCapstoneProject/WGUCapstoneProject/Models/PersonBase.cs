@@ -4,7 +4,9 @@ using System.Text;
 
 namespace WGUCapstoneProject.Models
 {
-    class Person
+    public abstract class PersonBase
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

@@ -4,7 +4,10 @@ using System.Text;
 
 namespace WGUCapstoneProject.Models
 {
-    class Case
+    public class Case
     {
+        public int CaseId { get; set; }
+        public string CaseName { get; set; }
+        public double TotalPostageCost { get; set; }
     }
 }

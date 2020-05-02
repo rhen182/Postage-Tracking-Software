@@ -4,7 +4,10 @@ using System.Text;
 
 namespace WGUCapstoneProject.Models
 {
-    class EmployeeMailToRecipient
+    public class EmployeeMailToRecipient
     {
+        public int EmployeeId { get; set; }
+        public int RecipientId { get; set; }
+        public int MailId { get; set; }
     }
 }

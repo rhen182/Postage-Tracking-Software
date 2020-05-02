@@ -4,7 +4,10 @@ using System.Text;
 
 namespace WGUCapstoneProject.Models
 {
-    class Organization
+    public class Organization
     {
+        public int OrganizationId { get; set; }
+        public string OrganizationName { get; set; }
+        public int AddressId { get; set; }
     }
 }

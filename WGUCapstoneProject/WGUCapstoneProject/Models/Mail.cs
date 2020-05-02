@@ -4,7 +4,12 @@ using System.Text;
 
 namespace WGUCapstoneProject.Models
 {
-    class Mail
+    public class Mail
     {
+        public int MailId { get; set; }
+        public DateTime dateSent { get; set; }
+        public int CaseId { get; set; }
+        public int Cost { get; set; }
+        public Enum PostageType { get; set; }
     }
 }
