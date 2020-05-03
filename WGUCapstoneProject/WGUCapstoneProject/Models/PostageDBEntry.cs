@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WGUCapstoneProject.Models
 {
-    public class PostageDBEntry : INotifyPropertyChanged
+    public class PostageDBEntry
     {
         public PostageDBEntry()
         {
@@ -35,43 +35,43 @@ namespace WGUCapstoneProject.Models
         public string Sender
         {
             get { return sender; }
-            set { sender = value; RaisePropertyChanged(); }
+            set { sender = value; }
         }
         public string CaseName
         {
             get { return caseName; }
-            set { caseName = value; RaisePropertyChanged(); }
+            set { caseName = value; }
         }
         public string Recipient
         {
             get { return recipient; }
-            set { recipient = value; RaisePropertyChanged(); }
+            set { recipient = value; }
         }
         public string Organization
         {
             get { return organization; }
-            set { organization = value; RaisePropertyChanged(); }
+            set { organization = value; }
         }
         public double Cost
         {
             get { return cost; }
-            set { cost = value; RaisePropertyChanged(); }
+            set { cost = value; }
         }
         public string PostageType
         {
             get { return postageType; }
-            set { postageType = value; RaisePropertyChanged(); }
+            set { postageType = value; }
         }
         public DateTime DateSent
         {
             get { return dateSent; }
-            set { dateSent = value; RaisePropertyChanged(); }
+            set { dateSent = value; }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(caller));
-        }
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //private void RaisePropertyChanged([CallerMemberName] string caller = "")
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(caller));
+        //}
     }
 }

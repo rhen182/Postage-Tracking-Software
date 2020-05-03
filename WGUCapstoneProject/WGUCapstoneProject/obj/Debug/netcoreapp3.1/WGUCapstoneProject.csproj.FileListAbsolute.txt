@@ -14,10 +14,10 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\MainWindow.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\PlaygroundViews\DataBindingWindow.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.g.resources
-F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CoreCompileInputs.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.AssemblyInfoInputs.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.AssemblyInfo.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.dll
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.pdb
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.genruntimeconfig.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csprojAssemblyReference.cache
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CoreCompileInputs.cache

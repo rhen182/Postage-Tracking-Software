@@ -44,7 +44,6 @@ namespace WGUCapstoneProject.AppViews
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             PostageList.Clear();
-            postageDataGrid.ItemsSource = PostageList;
         }
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
@@ -57,7 +56,6 @@ namespace WGUCapstoneProject.AppViews
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
             PostageList.Remove(PostageList[postageDataGrid.SelectedIndex]);
-            postageDataGrid.ItemsSource = PostageList;
         }
     }
 }

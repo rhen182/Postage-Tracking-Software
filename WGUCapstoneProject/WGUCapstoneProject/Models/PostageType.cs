@@ -4,10 +4,9 @@ using System.Text;
 
 namespace WGUCapstoneProject.Models
 {
-    public enum PostageType
+    public class PostageType
     {
-        FedEx,
-        UPS,
-        USPS
+        public int PostageId { get; set; }
+        public string PostageName { get; set; }
     }
 }

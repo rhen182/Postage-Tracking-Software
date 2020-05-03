@@ -28,7 +28,7 @@
         </Grid.RowDefinitions>
 
         <!--Row 1-->
-        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="1">
+        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Sender" Binding="{Binding Sender}"/>
                 <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>
