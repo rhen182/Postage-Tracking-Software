@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 using WGUCapstoneProject.Models;
 
 namespace WGUCapstoneProject.AppViews
@@ -22,11 +23,23 @@ namespace WGUCapstoneProject.AppViews
     public partial class ViewPostageWindow : Window
     {
         ObservableCollection<PostageDBEntry> PostageList = GetPostageList();
+        //Database directory. Takes the parent of the current directory and goes up a few times so the conn string is universal
+        string dbDir =
+            Directory.GetParent
+            (Directory.GetParent
+            (Directory.GetParent
+            (Environment.CurrentDirectory)
+            .ToString()).ToString()).ToString()
+            + "/PostageDB.db";
+        
+
+
 
         public ViewPostageWindow()
         {
             InitializeComponent();
             postageDataGrid.ItemsSource = PostageList;
+            //MessageBox.Show();
         }
 
         public static ObservableCollection<PostageDBEntry> GetPostageList()
