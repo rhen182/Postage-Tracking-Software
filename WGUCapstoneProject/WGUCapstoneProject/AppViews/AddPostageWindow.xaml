@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WGUCapstoneProject.AppViews"
         mc:Ignorable="d"
-        Title="AddPostageWindow" Height="450" Width="800">
+        Title="AddPostageWindow" Height="450" Width="500">
     
     <Grid>
         
@@ -41,7 +41,7 @@
 
         <!--Row 3-->
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Recipient" Margin="3"/>
-        <TextBox Grid.Row="3" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtRecipient"/>
+        <ComboBox Grid.Row="3" Grid.Column="2" MinWidth="150" Margin="3" x:Name="cmbRecipient" SelectionChanged="cmbRecipient_SelectionChanged"/>
         <TextBlock Grid.Row="3" Grid.Column="3" Text="Address Line 2" Margin="3"/>
         <TextBox Grid.Row="3" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtAddress2"/>
 
@@ -66,7 +66,7 @@
         <!--Row 7-->
         <Button
             x:Name="btnAdd" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="7"
-            Content="Confirm" Margin="3"
+            Content="Confirm" Margin="3" Click="BtnAdd_Click"
         ></Button>
         <Button
             x:Name="btnCancel" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7"

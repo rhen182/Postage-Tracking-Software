@@ -1,14 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "TRdPT8L35kld+Xq/nmOXXvxMPxFIAFstL5B/y/RVe+sKlIrQufFrZOBWRxmMWxjRWRS9tOwCygEz0ksKu16L4w==",
+  "dgSpecHash": "IWI4fiIio57nvL2jST+2YZsBP/9hgZ+FAknio3KWEjihNzISIt7ACJfqypKFLEisVy9eBY/B5900pijCqRyBGQ==",
   "success": true,
   "projectFilePath": "F:\\Documents\\GithubRepo\\WGU Capstone\\WGUCapstone\\WGUCapstoneProject\\WGUCapstoneProject\\WGUCapstoneProject.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Christian\\.nuget\\packages\\dapper\\2.0.35\\dapper.2.0.35.nupkg.sha512",
+    "C:\\Users\\Christian\\.nuget\\packages\\microsoft.data.sqlite\\5.0.0-preview.3.20181.2\\microsoft.data.sqlite.5.0.0-preview.3.20181.2.nupkg.sha512",
     "C:\\Users\\Christian\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.0-preview.3.20181.2\\microsoft.data.sqlite.core.5.0.0-preview.3.20181.2.nupkg.sha512",
+    "C:\\Users\\Christian\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.2\\sqlitepclraw.bundle_e_sqlite3.2.0.2.nupkg.sha512",
     "C:\\Users\\Christian\\.nuget\\packages\\sqlitepclraw.core\\2.0.2\\sqlitepclraw.core.2.0.2.nupkg.sha512",
-    "C:\\Users\\Christian\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
-    "C:\\Users\\Christian\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
+    "C:\\Users\\Christian\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.2\\sqlitepclraw.lib.e_sqlite3.2.0.2.nupkg.sha512",
+    "C:\\Users\\Christian\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.2\\sqlitepclraw.provider.dynamic_cdecl.2.0.2.nupkg.sha512",
+    "C:\\Users\\Christian\\.nuget\\packages\\system.data.sqlite.core\\1.0.112.2\\system.data.sqlite.core.1.0.112.2.nupkg.sha512",
+    "C:\\Users\\Christian\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }
