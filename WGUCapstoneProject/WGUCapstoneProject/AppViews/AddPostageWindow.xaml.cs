@@ -21,5 +21,12 @@ namespace WGUCapstoneProject.AppViews
         {
             InitializeComponent();
         }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            ViewPostageWindow viewPostage = new ViewPostageWindow();
+            Close();
+            viewPostage.Show();
+        }
     }
 }

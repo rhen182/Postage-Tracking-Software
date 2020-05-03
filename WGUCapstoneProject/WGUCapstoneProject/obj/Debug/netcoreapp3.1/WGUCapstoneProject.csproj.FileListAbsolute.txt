@@ -22,3 +22,10 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csprojAssemblyReference.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\bin\Debug\netcoreapp3.1\PostageDB.db
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject_Content.g.cs
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\bin\Debug\netcoreapp3.1\Dapper.dll
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\AddPostageWindow.g.cs
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\AddPostageWindow.baml
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CoreCompileInputs.cache
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CopyComplete

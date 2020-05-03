@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WGUCapstoneProject.AppViews"
         mc:Ignorable="d"
         Title="AddPostageWindow" Height="450" Width="800">
+    
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="auto"/>
@@ -24,42 +26,52 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
+        
         <!--Row 1-->
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Case" Margin="3"/>
-        <TextBox Grid.Row="1" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtCase"/>
-        <TextBlock Grid.Row="1" Grid.Column="3" Text="Address Line 1" Margin="3"/>
-        <TextBox Grid.Row="1" Grid.Column="4" MinWidth="150" Margin="3"/>
-
-
+        <TextBlock Text="Add Postage" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Center"/>
+        
         <!--Row 2-->
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="Recipient" Margin="3"/>
-        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="150" Margin="3"/>
-        <TextBlock Grid.Row="2" Grid.Column="3" Text="Address Line 2" Margin="3"/>
-        <TextBox Grid.Row="2" Grid.Column="4" MinWidth="150" Margin="3"/>
-
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Case" Margin="3"/>
+        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtCase"/>
+        <TextBlock Grid.Row="2" Grid.Column="3" Text="Address Line 1" Margin="3"/>
+        <TextBox Grid.Row="2" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtAddress1"/>
 
         <!--Row 3-->
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="Organization" Margin="3"/>
-        <TextBox Grid.Row="3" Grid.Column="2" MinWidth="150" Margin="3"/>
-        <TextBlock Grid.Row="3" Grid.Column="3" Text="City" Margin="3"/>
-        <TextBox Grid.Row="3" Grid.Column="4" MinWidth="150" Margin="3"/>
-
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Recipient" Margin="3"/>
+        <TextBox Grid.Row="3" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtRecipient"/>
+        <TextBlock Grid.Row="3" Grid.Column="3" Text="Address Line 2" Margin="3"/>
+        <TextBox Grid.Row="3" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtAddress2"/>
 
         <!--Row 4-->
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="Cost" Margin="3"/>
-        <TextBox Grid.Row="4" Grid.Column="2" MinWidth="150" Margin="3"/>
-        <TextBlock Grid.Row="4" Grid.Column="3" Text="State" Margin="3"/>
-        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="150" Margin="3"/>
-
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Organization" Margin="3"/>
+        <TextBox Grid.Row="4" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtOrganization"/>
+        <TextBlock Grid.Row="4" Grid.Column="3" Text="City" Margin="3"/>
+        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtCity"/>
 
         <!--Row 5-->
-        <TextBlock Grid.Row="5" Grid.Column="1" Text="Postage Type" Margin="3"/>
-        <TextBox Grid.Row="5" Grid.Column="2" MinWidth="150" Margin="3"/>
-        <TextBlock Grid.Row="5" Grid.Column="3" Text="Zip Code" Margin="3"/>
-        <TextBox Grid.Row="5" Grid.Column="4" MinWidth="150" Margin="3"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="Cost" Margin="3"/>
+        <TextBox Grid.Row="5" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtCost"/>
+        <TextBlock Grid.Row="5" Grid.Column="3" Text="State" Margin="3"/>
+        <TextBox Grid.Row="5" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtState"/>
 
-
+        <!--Row 6-->
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="Postage Type" Margin="3"/>
+        <TextBox Grid.Row="6" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtPostageType"/>
+        <TextBlock Grid.Row="6" Grid.Column="3" Text="Zip Code" Margin="3"/>
+        <TextBox Grid.Row="6" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtZipCode"/>
+        
+        <!--Row 7-->
+        <Button
+            x:Name="btnAdd" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="7"
+            Content="Confirm" Margin="3"
+        ></Button>
+        <Button
+            x:Name="btnCancel" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7"
+            Content="Cancel" Margin="3" Click="BtnCancel_Click"
+        ></Button>
     </Grid>
+    
 </Window>

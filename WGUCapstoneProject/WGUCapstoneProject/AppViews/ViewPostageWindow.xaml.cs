@@ -72,7 +72,9 @@ namespace WGUCapstoneProject.AppViews
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            AddPostageWindow addPostage = new AddPostageWindow();
+            Close();
+            addPostage.Show();
         }
     }
 }
