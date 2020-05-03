@@ -39,7 +39,6 @@ namespace WGUCapstoneProject.AppViews
         {
             InitializeComponent();
             postageDataGrid.ItemsSource = PostageList;
-            //MessageBox.Show();
         }
 
         public static ObservableCollection<PostageDBEntry> GetPostageList()
@@ -69,6 +68,11 @@ namespace WGUCapstoneProject.AppViews
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
             PostageList.Remove(PostageList[postageDataGrid.SelectedIndex]);
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

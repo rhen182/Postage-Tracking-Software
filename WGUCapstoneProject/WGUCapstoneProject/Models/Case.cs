@@ -8,6 +8,5 @@ namespace WGUCapstoneProject.Models
     {
         public int CaseId { get; set; }
         public string CaseName { get; set; }
-        public double TotalPostageCost { get; set; }
     }
 }
