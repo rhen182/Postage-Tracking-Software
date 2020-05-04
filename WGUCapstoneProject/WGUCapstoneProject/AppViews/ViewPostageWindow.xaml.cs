@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using WGUCapstoneProject.Models;
+using System.Data.SQLite;
+using System.Data;
 
 namespace WGUCapstoneProject.AppViews
 {
@@ -24,25 +26,51 @@ namespace WGUCapstoneProject.AppViews
     {
         ObservableCollection<PostageDBEntry> PostageList = GetPostageList();
         //Database directory. Takes the parent of the current directory and goes up a few times so the conn string is universal
-        string dbDir =
-            Directory.GetParent
-            (Directory.GetParent
-            (Directory.GetParent
-            (Environment.CurrentDirectory)
-            .ToString()).ToString()).ToString()
-            + "/PostageDB.db";
+
         
+        public void RefreshPostageData()
+        {
+            string dbDir =
+                Directory.GetParent
+                (Directory.GetParent
+                (Directory.GetParent
+                (Environment.CurrentDirectory)
+                .ToString()).ToString()).ToString()
+                + "/PostageDB.db";
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + dbDir + ";");
+            try
+            {
+                conn.Open();
+                SQLiteCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM PostageDBEntry ";
+                using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn))
+                {
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+                    postageDataGrid.ItemsSource = dataTable.AsDataView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
 
 
         public ViewPostageWindow()
         {
             InitializeComponent();
-            postageDataGrid.ItemsSource = PostageList;
+            //postageDataGrid.ItemsSource = PostageList;
         }
 
         public static ObservableCollection<PostageDBEntry> GetPostageList()
         {
+
+
+
             ObservableCollection<PostageDBEntry> postageList = new ObservableCollection<PostageDBEntry>
             {
                 new PostageDBEntry("Christian Allen", "Allen", "Brandon Roberts", "Roberts", 12.50, "USPS", Convert.ToDateTime("12/20/2020")),
@@ -60,9 +88,7 @@ namespace WGUCapstoneProject.AppViews
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-            Close();
-            viewPostageWindow.Show();
+            RefreshPostageData();
         }
 
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)

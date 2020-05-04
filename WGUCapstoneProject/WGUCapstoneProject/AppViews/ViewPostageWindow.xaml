@@ -28,14 +28,14 @@
         </Grid.RowDefinitions>
 
         <!--Row 1-->
-        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Sender" Binding="{Binding Sender}"/>
+                <DataGridTextColumn Header="Mail ID" Binding="{Binding MailId}"/>
                 <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>
-                <DataGridTextColumn Header="Recipient" Binding="{Binding Recipient}"/>
-                <DataGridTextColumn Header="Organization" Binding="{Binding Organization}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Organization" Binding="{Binding OrganizationName}"/>
                 <DataGridTextColumn Header="Cost" Binding="{Binding Cost}"/>
-                <DataGridTextColumn Header="Postage Type" Binding="{Binding PostageType}"/>
+                <DataGridTextColumn Header="Postage Type" Binding="{Binding PostageTypeName}"/>
                 <DataGridTextColumn Header="Date Sent" Binding="{Binding DateSent}"/>
             </DataGrid.Columns>
         </DataGrid>
