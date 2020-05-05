@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.IO;
 using System.Text;
+using WGUCapstoneProject.HelperClasses;
 
 namespace WGUCapstoneProject.Models
 {
@@ -11,8 +13,9 @@ namespace WGUCapstoneProject.Models
 
 
 
-        public Address(string addressLine1, string addressLine2, string city, string state, string zipCode)
+        public Address(int addressId, string addressLine1, string addressLine2, string city, string state, string zipCode)
         {
+            AddressId = addressId;
             AddressLine1 = addressLine1;
             AddressLine2 = addressLine2;
             City = city;
@@ -27,7 +30,28 @@ namespace WGUCapstoneProject.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
 
+        public void GetAddresses()
+        {
+            ObservableCollection<Address> addressList = new ObservableCollection<Address>();
+            SQLiteCommand command = new SQLiteCommand("select * from Address", SQLiteHelper.conn);
+            try
+            {
+                SQLiteHelper.conn.Open();
+                SQLiteDataReader sqliteDataReader = command.ExecuteReader();
+                while (sqliteDataReader.Read())
+                {
+                    addressList.Add(new Address(sqliteDataReader));
+                }
+                //SQLiteCommand sqliteCmd;
+                //sqliteCmd = SQLiteHelper.conn.CreateCommand();
+                //sqliteCmd.CommandText = "Select * FROM Address"; //trying to add to list
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
 
 
 

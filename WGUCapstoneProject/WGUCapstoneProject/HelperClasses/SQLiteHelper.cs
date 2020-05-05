@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 using System.Text;
 using System.Windows;
 
@@ -9,6 +10,17 @@ namespace WGUCapstoneProject.HelperClasses
 {
     public class SQLiteHelper
     {
+        static public string dbDir = Directory.GetParent
+                (Directory.GetParent
+                (Directory.GetParent
+                (Environment.CurrentDirectory)
+                .ToString()).ToString()).ToString()
+                + "/PostageDB.db";
+
+        static public SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.dbDir + ";");
+
+
+
         static SQLiteConnection CreateConnection()
         {
             SQLiteConnection sqliteConn;
