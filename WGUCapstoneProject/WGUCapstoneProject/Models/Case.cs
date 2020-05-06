@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using WGUCapstoneProject.HelperClasses;
 
 namespace WGUCapstoneProject.Models
 {
@@ -11,21 +12,22 @@ namespace WGUCapstoneProject.Models
         public int CaseId { get; set; }
         public string CaseName { get; set; }
 
-        public static ObservableCollection<Case> CaseObservableCollection(ObservableCollection<Case> cases, string connString)
+        public static ObservableCollection<Case> CaseObservableCollection()
         {
             //Step 1 - define the observable collection
+            ObservableCollection<Case> cases = new ObservableCollection<Case>();
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = connString;
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
 
-            //Step 2 - Connection
+            //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
 
             //Step 3 - Command
             SqliteCommand command = new SqliteCommand();
-            command.CommandText = "SELECT * FROM Case";
+            command.CommandText = "SELECT * FROM LegalCase";
             command.Connection = conn;
 
             //Step 4 - Open connection

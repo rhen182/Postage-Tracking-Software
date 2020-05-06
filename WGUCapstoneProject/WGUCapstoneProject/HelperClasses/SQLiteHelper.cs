@@ -29,7 +29,7 @@ namespace WGUCapstoneProject.HelperClasses
             {
                 sqliteConn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

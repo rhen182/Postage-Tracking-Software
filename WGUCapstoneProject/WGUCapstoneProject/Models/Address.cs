@@ -19,15 +19,16 @@ namespace WGUCapstoneProject.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
 
-        public static ObservableCollection<Address> AddressObservableCollection(ObservableCollection<Address> addresses, string connString)
+        public static ObservableCollection<Address> AddressObservableCollection()
         {
             //Step 1 - define the observable collection
+            ObservableCollection<Address> addresses = new ObservableCollection<Address>();
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = connString;
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
 
-            //Step 2 - Connection
+            //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
 

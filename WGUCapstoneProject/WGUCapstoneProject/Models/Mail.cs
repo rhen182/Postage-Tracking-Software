@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.ObjectModel;
+using WGUCapstoneProject.HelperClasses;
 
 namespace WGUCapstoneProject.Models
 {
@@ -14,15 +15,16 @@ namespace WGUCapstoneProject.Models
         public int AddressId { get; set; }
         public int RecipientId { get; set; }
 
-        public static ObservableCollection<Mail> CaseObservableCollection(ObservableCollection<Mail> mails, string connString)
+        public static ObservableCollection<Mail> CaseObservableCollection()
         {
             //Step 1 - define the observable collection
+            ObservableCollection<Mail> mails = new ObservableCollection<Mail>();
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = connString;
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
 
-            //Step 2 - Connection
+            //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
 

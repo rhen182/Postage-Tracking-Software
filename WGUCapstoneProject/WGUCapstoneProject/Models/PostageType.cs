@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using WGUCapstoneProject.HelperClasses;
 
 namespace WGUCapstoneProject.Models
 {
@@ -11,15 +12,16 @@ namespace WGUCapstoneProject.Models
         public int PostageTypeId { get; set; }
         public string PostageTypeName { get; set; }
 
-        public static ObservableCollection<PostageType> PostageTypeObservableCollection(ObservableCollection<PostageType> postageTypes, string connString)
+        public static ObservableCollection<PostageType> PostageTypeObservableCollection()
         {
             //Step 1 - define the observable collection
+            ObservableCollection<PostageType> postageTypes = new ObservableCollection<PostageType>();
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = connString;
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
 
-            //Step 2 - Connection
+            //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
 

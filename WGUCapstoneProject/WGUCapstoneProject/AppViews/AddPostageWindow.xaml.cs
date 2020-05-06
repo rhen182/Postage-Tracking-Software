@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WGUCapstoneProject.HelperClasses;
 using WGUCapstoneProject.Models;
 
 namespace WGUCapstoneProject.AppViews
@@ -19,15 +20,18 @@ namespace WGUCapstoneProject.AppViews
     /// </summary>
     public partial class AddPostageWindow : Window
     {
+        public ObservableCollection<Case> caseList { get; set; }
+        public ObservableCollection<Recipient> recipients { get; set; }
+        public ObservableCollection<PostageType> postageTypes { get; set; }
+
         public AddPostageWindow()
         {
             InitializeComponent();
-            ObservableCollection<Recipient> recipientList = new ObservableCollection<Recipient>();
 
-
-
-
-            cmbRecipient.ItemsSource = recipientList;
+            caseList = Case.CaseObservableCollection();
+            recipients = Recipient.RecipientObservableCollection();
+            postageTypes = PostageType.PostageTypeObservableCollection();
+            DataContext = this;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -40,26 +44,6 @@ namespace WGUCapstoneProject.AppViews
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
 
-
-
-
-            Case legalCase = new Case();
-
-            Recipient recipient = new Recipient();
-
-            Organization organization = new Organization();
-
-            PostageType postageType = new PostageType();
-
-            Mail mail = new Mail();
-        }
-
-
-        private void cmbRecipient_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
-
-

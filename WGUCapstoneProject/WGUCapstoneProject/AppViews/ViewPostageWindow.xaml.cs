@@ -25,13 +25,32 @@ namespace WGUCapstoneProject.AppViews
     /// </summary>
     public partial class ViewPostageWindow : Window
     {
-        
+        public ViewPostageWindow()
+        {
+            InitializeComponent();
+            RefreshPostageDataToGrid(postageDataGrid);
+        }
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddPostageWindow addPostage = new AddPostageWindow();
+            Close();
+            addPostage.Show();
+        }
 
         public void RefreshPostageDataToGrid(DataGrid dataGrid)
         {
@@ -52,38 +71,6 @@ namespace WGUCapstoneProject.AppViews
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-
-
-
-        public ViewPostageWindow()
-        {
-            InitializeComponent();
-            ObservableCollection<Address> AddressList = new ObservableCollection<Address>();
-            Address.AddressObservableCollection(AddressList, SQLiteHelper.dbDir);
-        }
-
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshPostageDataToGrid(postageDataGrid);
-        }
-
-        private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddPostageWindow addPostage = new AddPostageWindow();
-            Close();
-            addPostage.Show();
         }
     }
 }

@@ -35,13 +35,19 @@
         
         <!--Row 2-->
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Case" Margin="3"/>
-        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtCase"/>
+        <ComboBox 
+            Grid.Row="2" Grid.Column="2" MinWidth="150" Margin="3" x:Name="cmbCase"
+            ItemsSource="{Binding caseList}" DisplayMemberPath="CaseName"
+        ></ComboBox>
         <TextBlock Grid.Row="2" Grid.Column="3" Text="Address Line 1" Margin="3"/>
         <TextBox Grid.Row="2" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtAddress1"/>
 
         <!--Row 3-->
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Recipient" Margin="3"/>
-        <ComboBox Grid.Row="3" Grid.Column="2" MinWidth="150" Margin="3" x:Name="cmbRecipient" SelectionChanged="cmbRecipient_SelectionChanged"/>
+        <ComboBox
+            Grid.Row="3" Grid.Column="2" MinWidth="150" Margin="3" x:Name="cmbRecipient"
+            ItemsSource="{Binding recipients}" DisplayMemberPath="FullName"
+        ></ComboBox>
         <TextBlock Grid.Row="3" Grid.Column="3" Text="Address Line 2" Margin="3"/>
         <TextBox Grid.Row="3" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtAddress2"/>
 
@@ -59,7 +65,10 @@
 
         <!--Row 6-->
         <TextBlock Grid.Row="6" Grid.Column="1" Text="Postage Type" Margin="3"/>
-        <TextBox Grid.Row="6" Grid.Column="2" MinWidth="150" Margin="3" x:Name="txtPostageType"/>
+        <ComboBox
+            Grid.Row="6" Grid.Column="2" MinWidth="150" Margin="3" x:Name="cmbPostageType"
+            ItemsSource="{Binding postageTypes}" DisplayMemberPath="PostageTypeName"
+        ></ComboBox>
         <TextBlock Grid.Row="6" Grid.Column="3" Text="Zip Code" Margin="3"/>
         <TextBox Grid.Row="6" Grid.Column="4" MinWidth="150" Margin="3" x:Name="txtZipCode"/>
         
