@@ -12,6 +12,16 @@ namespace WGUCapstoneProject.Models
         public int PostageTypeId { get; set; }
         public string PostageTypeName { get; set; }
 
+        public PostageType()
+        {
+
+        }
+
+        public PostageType(string postageTypeName)
+        {
+            PostageTypeName = postageTypeName;
+        }
+
         public static ObservableCollection<PostageType> PostageTypeObservableCollection()
         {
             //Step 1 - define the observable collection

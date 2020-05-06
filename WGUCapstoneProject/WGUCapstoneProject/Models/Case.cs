@@ -9,6 +9,15 @@ namespace WGUCapstoneProject.Models
 {
     public class Case
     {
+        public Case(string caseName)
+        {
+            CaseName = caseName;
+        }
+        public Case()
+        {
+
+        }
+
         public int CaseId { get; set; }
         public string CaseName { get; set; }
 
@@ -55,6 +64,31 @@ namespace WGUCapstoneProject.Models
 
             //Step x = return the ObservableCollection
             return cases;
+        }
+
+        public static void InsertCaseToDb(string legalCaseName)
+        {
+            //Step 1 - The Connection String
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+
+            //Step 2 - The Connection
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+
+            //Step 3 - The Command
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = conn;
+            command.CommandText = @"INSERT INTO LegalCase (CaseName) VALUES ('" + legalCaseName + "')";
+
+            //Step 4 - Open the Connection
+            conn.Open();
+
+            //Step 5 - Execute the Command
+            command.ExecuteNonQuery();
+
+            //Step 6 - Close the Connection
+            conn.Close();
         }
     }
 }

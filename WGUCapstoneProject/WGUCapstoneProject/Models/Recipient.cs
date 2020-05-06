@@ -15,6 +15,15 @@ namespace WGUCapstoneProject.Models
         {
             get { return FirstName + " " + LastName; }
         }
+        public Recipient()
+        {
+
+        }
+        public Recipient(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
 
         public static ObservableCollection<Recipient> RecipientObservableCollection()
         {
