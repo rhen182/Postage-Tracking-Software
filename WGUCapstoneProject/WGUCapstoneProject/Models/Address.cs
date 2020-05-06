@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
@@ -11,18 +12,6 @@ namespace WGUCapstoneProject.Models
     public class Address
     {
 
-
-
-        public Address(int addressId, string addressLine1, string addressLine2, string city, string state, string zipCode)
-        {
-            AddressId = addressId;
-            AddressLine1 = addressLine1;
-            AddressLine2 = addressLine2;
-            City = city;
-            State = state;
-            ZipCode = zipCode;
-        }
-
         public int AddressId { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -30,27 +19,55 @@ namespace WGUCapstoneProject.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
 
-        public void GetAddresses()
+        public static ObservableCollection<Address> AddressObservableCollection(ObservableCollection<Address> addresses, string connString)
         {
-            ObservableCollection<Address> addressList = new ObservableCollection<Address>();
-            SQLiteCommand command = new SQLiteCommand("select * from Address", SQLiteHelper.conn);
-            try
-            {
-                SQLiteHelper.conn.Open();
-                SQLiteDataReader sqliteDataReader = command.ExecuteReader();
-                while (sqliteDataReader.Read())
-                {
-                    addressList.Add(new Address(sqliteDataReader));
-                }
-                //SQLiteCommand sqliteCmd;
-                //sqliteCmd = SQLiteHelper.conn.CreateCommand();
-                //sqliteCmd.CommandText = "Select * FROM Address"; //trying to add to list
-            }
-            catch (Exception)
-            {
+            //Step 1 - define the observable collection
 
-                throw;
+            //Step 2 - Connection String
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = connString;
+
+            //Step 2 - Connection
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+
+            //Step 3 - Command
+            SqliteCommand command = new SqliteCommand();
+            command.CommandText = "SELECT * FROM Address";
+            command.Connection = conn;
+
+            //Step 4 - Open connection
+            conn.Open();
+
+            //Step 5 - Execute Command
+            SqliteDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Address address = new Address();
+                    address.AddressId = reader.GetInt32(0);
+                    address.AddressLine1 = reader.GetString(1);
+                    if (!reader.IsDBNull(2))
+                    {
+                        address.AddressLine2 = reader.GetString(2).ToString();
+                    }
+                    address.City = reader.GetString(3);
+                    address.State = reader.GetString(4);
+                    address.ZipCode = reader.GetString(5);
+                    addresses.Add(address);
+                }
             }
+            else
+            {
+                return null;
+            }
+
+            //Step x = Close Connection
+            conn.Close();
+
+            //Step x = return the ObservableCollection
+            return addresses;
         }
 
 

@@ -25,8 +25,12 @@ namespace WGUCapstoneProject.AppViews
     /// </summary>
     public partial class ViewPostageWindow : Window
     {
-        ObservableCollection<PostageDBEntry> PostageList = GetPostageList();
-        //Database directory. Takes the parent of the current directory and goes up a few times so the conn string is universal
+        
+
+
+
+
+
 
 
         public void RefreshPostageDataToGrid(DataGrid dataGrid)
@@ -56,24 +60,13 @@ namespace WGUCapstoneProject.AppViews
         public ViewPostageWindow()
         {
             InitializeComponent();
-            RefreshPostageDataToGrid(postageDataGrid);
-        }
-
-        public static ObservableCollection<PostageDBEntry> GetPostageList()
-        {
-            ObservableCollection<PostageDBEntry> postageList = new ObservableCollection<PostageDBEntry>
-            {
-                new PostageDBEntry("Christian Allen", "Allen", "Brandon Roberts", "Roberts", 12.50, "USPS", Convert.ToDateTime("12/20/2020")),
-                new PostageDBEntry("Christian Allen", "Allen", "Jake Serna", "Serna", 1.30, "USPS", Convert.ToDateTime("12/20/2020")),
-                new PostageDBEntry("Christian Allen", "George", "Davinaty Roberts", "Roberts", 14.00, "USPS", Convert.ToDateTime("12/20/2020")),
-                new PostageDBEntry("Christian Allen", "Bob", "Kyle Muller", "Muller", 12.51, "USPS", Convert.ToDateTime("12/20/2020"))
-            };
-            return postageList;
+            ObservableCollection<Address> AddressList = new ObservableCollection<Address>();
+            Address.AddressObservableCollection(AddressList, SQLiteHelper.dbDir);
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            PostageList.Clear();
+
         }
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
@@ -83,7 +76,7 @@ namespace WGUCapstoneProject.AppViews
 
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
-            PostageList.Remove(PostageList[postageDataGrid.SelectedIndex]);
+
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
