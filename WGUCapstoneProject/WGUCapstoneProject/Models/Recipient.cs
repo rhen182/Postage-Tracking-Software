@@ -10,7 +10,6 @@ namespace WGUCapstoneProject.Models
     public class Recipient : PersonBase
     {
         public int RecipientId { get; set; }
-        public int OrganizationId { get; set; }
         public string FullName
         {
             get { return FirstName + " " + LastName; }
@@ -56,7 +55,6 @@ namespace WGUCapstoneProject.Models
                     recipient.RecipientId = reader.GetInt32(0);
                     recipient.FirstName = reader.GetString(1);
                     recipient.LastName = reader.GetString(2);
-                    recipient.OrganizationId = reader.GetInt32(3);
                     recipients.Add(recipient);
                 }
             }

@@ -9,10 +9,10 @@ namespace WGUCapstoneProject.Models
     {
         public int MailId { get; set; }
         public DateTime DateSent { get; set; }
-        public int CaseId { get; set; }
         public double Cost { get; set; }
+        public int CaseId { get; set; }
         public int PostageTypeId { get; set; }
-        public int AddressId { get; set; }
+        public int OrganizationId { get; set; }
         public int RecipientId { get; set; }
 
         public static ObservableCollection<Mail> CaseObservableCollection()
@@ -48,7 +48,7 @@ namespace WGUCapstoneProject.Models
                     mail.CaseId = reader.GetInt32(2);
                     mail.Cost = reader.GetDouble(3);
                     mail.PostageTypeId = reader.GetInt32(4);
-                    mail.AddressId = reader.GetInt32(5);
+                    mail.OrganizationId = reader.GetInt32(5);
                     mail.RecipientId = reader.GetInt32(6);
                     mails.Add(mail);
                 }
@@ -65,7 +65,7 @@ namespace WGUCapstoneProject.Models
             return mails;
         }
 
-        public static void InsertPostageToDb(DateTime dateSent, int caseId, double cost, int postageTypeId, int addressId, int recipientId)
+        public static void InsertPostageToDb(DateTime dateSent, int caseId, double cost, int postageTypeId, int organizationId, int recipientId)
         {
             //Step 1 - The Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
@@ -82,7 +82,7 @@ namespace WGUCapstoneProject.Models
             command.Connection = conn;
             command.CommandText = 
                 @"INSERT INTO Mail (CaseName) 
-                  VALUES ('" + dateSent + "', " + caseId + ", " + cost + ", " + postageTypeId + ", " + addressId + ", " + recipientId + ")";
+                  VALUES ('" + dateSent + "', " + caseId + ", " + cost + ", " + postageTypeId + ", " + organizationId + ", " + recipientId + ")";
 
 
 

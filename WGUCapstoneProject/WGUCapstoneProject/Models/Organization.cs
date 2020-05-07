@@ -11,8 +11,12 @@ namespace WGUCapstoneProject.Models
     {
         public int OrganizationId { get; set; }
         public string OrganizationName { get; set; }
-        public int AddressId { get; set; }
-        public static ObservableCollection<Organization> RecipientObservableCollection()
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+        public static ObservableCollection<Organization> OrganizationObservableCollection()
         {
             //Step 1 - define the observable collection
             ObservableCollection<Organization> organizations = new ObservableCollection<Organization>();
@@ -42,7 +46,11 @@ namespace WGUCapstoneProject.Models
                     Organization organization = new Organization();
                     organization.OrganizationId = reader.GetInt32(0);
                     organization.OrganizationName = reader.GetString(1);
-                    organization.AddressId = reader.GetInt32(2);
+                    organization.AddressLine1 = reader.GetString(2);
+                    organization.AddressLine2 = reader.GetString(3);
+                    organization.City = reader.GetString(4);
+                    organization.State = reader.GetString(5);
+                    organization.Zip = reader.GetString(6);
                     organizations.Add(organization);
                 }
             }
@@ -56,6 +64,29 @@ namespace WGUCapstoneProject.Models
 
             //Step x = return the ObservableCollection
             return organizations;
+        }
+
+        public Organization()
+        {
+
+        }
+        public Organization(string organizationName)
+        {
+            OrganizationName = organizationName;
+        }
+        public static void InsertOrganizationToDb(string organizationName, string addressLine1, string addressLine2, string city, string state, string zip)
+        {
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = conn;
+            command.CommandText = @"INSERT INTO Organization (OrganizationName, AddressLine1, AddressLine2, City, State, Zip)
+                                    VALUES ('" + organizationName + "', '" + addressLine1 + "', '" + addressLine2 + "', '" + city + "', '" + state + "', '" + zip + "')";
+            conn.Open();
+            command.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }

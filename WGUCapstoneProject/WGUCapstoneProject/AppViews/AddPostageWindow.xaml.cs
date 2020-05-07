@@ -29,11 +29,11 @@ namespace WGUCapstoneProject.AppViews
         public Case newCase = new Case("New Case");
         public Recipient newRecipient = new Recipient("New", "Recipient");
         public PostageType newPostageType = new PostageType("New Postage Type");
+        public Organization newOrganization = new Organization("New Organization");
 
         Mail mail = new Mail();
         Case legalCase = new Case();
         PostageType postageType = new PostageType();
-        Address address = new Address();
         Recipient recipient = new Recipient();
         Organization organization = new Organization();
 
@@ -41,21 +41,41 @@ namespace WGUCapstoneProject.AppViews
         {
             InitializeComponent();
 
-            caseList = Case.CaseObservableCollection();
-            caseList.Add(newCase);
-            caseList.Move(caseList.IndexOf(caseList[caseList.Count - 1]), caseList.IndexOf(caseList[0]));
+            if (Case.CaseObservableCollection() == null)
+            {
+                cmbCase.Visibility = Visibility.Collapsed;
+                txtNewCaseName.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                caseList = Case.CaseObservableCollection();
+                caseList.Add(newCase);
+                caseList.Move(caseList.IndexOf(caseList[caseList.Count - 1]), caseList.IndexOf(caseList[0]));
+            }
 
+            if (PostageType.PostageTypeObservableCollection() == null)
+            {
+                cmbPostageType.Visibility = Visibility.Collapsed;
+                txtNewPostageTypeName.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                postageTypes = PostageType.PostageTypeObservableCollection();
+                postageTypes.Add(newPostageType);
+                postageTypes.Move(postageTypes.IndexOf(postageTypes[postageTypes.Count - 1]), postageTypes.IndexOf(postageTypes[0]));
+            }
 
-            recipients = Recipient.RecipientObservableCollection();
-            recipients.Add(newRecipient);
-            recipients.Move(recipients.IndexOf(recipients[recipients.Count - 1]), recipients.IndexOf(recipients[0]));
-
-
-            postageTypes = PostageType.PostageTypeObservableCollection();
-            postageTypes.Add(newPostageType);
-            postageTypes.Move(postageTypes.IndexOf(postageTypes[postageTypes.Count - 1]), postageTypes.IndexOf(postageTypes[0]));
-
-
+            if (Organization.OrganizationObservableCollection() == null)
+            {
+                cmbOrganization.Visibility = Visibility.Collapsed;
+                txtNewOrganizationName.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                organizations = Organization.OrganizationObservableCollection();
+                organizations.Add(newOrganization);
+                organizations.Move(organizations.IndexOf(organizations[organizations.Count - 1]), organizations.IndexOf(organizations[0]));
+            }
             DataContext = this;
         }
 
@@ -68,10 +88,6 @@ namespace WGUCapstoneProject.AppViews
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-
-
-            mail.DateSent = DateTime.Now;
-
             if (String.IsNullOrEmpty(txtNewCaseName.Text))
             {
                 legalCase = (Case)cmbCase.SelectedItem;
@@ -81,6 +97,7 @@ namespace WGUCapstoneProject.AppViews
             {
                 legalCase.CaseName = txtNewCaseName.Text;
                 Case.InsertCaseToDb(legalCase.CaseName);
+                mail.CaseId = legalCase.CaseId;
             }
 
             if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
@@ -92,20 +109,25 @@ namespace WGUCapstoneProject.AppViews
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
+                mail.PostageTypeId = postageType.PostageTypeId;
             }
+            if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
+            {
+                organization = (Organization)cmbOrganization.SelectedItem;
+                Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
+                mail.OrganizationId = organization.OrganizationId;
+            }
+            else
+            {
+                organization.OrganizationName = txtNewOrganizationName.Text;
+                Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
+                mail.OrganizationId = organization.OrganizationId;
+            }
+            mail.DateSent = DateTime.Now;
+            mail.Cost = Convert.ToDouble(txtCost.Text);
+            
+            Mail.InsertPostageToDb(mail.DateSent, mail.CaseId, mail.Cost, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
-            mail.RecipientId = recipient.RecipientId;
-
-
-
-
-            address.AddressLine1 = txtAddress1.Text;
-            address.AddressLine2 = txtAddress2.Text;
-            address.City = txtCity.Text;
-            address.State = txtState.Text;
-            address.ZipCode = txtZipCode.Text;
-
-            Address.InsertAddressToDb(address.AddressLine1, address.AddressLine2, address.City, address.State, address.ZipCode);
         }
 
         private void cmbCase_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -119,33 +141,32 @@ namespace WGUCapstoneProject.AppViews
 
         }
 
-        private void cmbRecipient_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Recipient recipient = new Recipient();
-            Mail mail = new Mail();
-
-            if (cmbRecipient.SelectedItem == newRecipient)
-            {
-                cmbRecipient.Visibility = Visibility.Collapsed;
-                txtNewRecipientFirstName.Visibility = Visibility.Visible;
-                txtNewRecipientLastName.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                recipient.FirstName = txtNewRecipientFirstName.Text;
-                recipient.LastName = txtNewRecipientLastName.Text;
-
-                recipient = (Recipient)cmbRecipient.SelectedItem;
-                txtOrganization.Text = Organization.RecipientObservableCollection().ToList().Find(x => recipient.OrganizationId == x.OrganizationId).OrganizationName;
-            }
-        }
-
         private void cmbPostageType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbPostageType.SelectedItem == newPostageType)
             {
                 cmbPostageType.Visibility = Visibility.Collapsed;
                 txtNewPostageTypeName.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void cmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Organization organization = new Organization();
+
+            if (cmbOrganization.SelectedItem == newOrganization)
+            {
+                cmbOrganization.Visibility = Visibility.Collapsed;
+                txtNewOrganizationName.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                organization = (Organization)cmbOrganization.SelectedItem;
+                txtAddress1.Text = organization.AddressLine1;
+                txtAddress2.Text = organization.AddressLine2;
+                txtCity.Text = organization.City;
+                txtState.Text = organization.State;
+                txtZip.Text = organization.Zip;
             }
         }
     }

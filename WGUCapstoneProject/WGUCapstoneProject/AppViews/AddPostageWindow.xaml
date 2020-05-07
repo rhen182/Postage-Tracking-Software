@@ -46,19 +46,19 @@
 
         <!--Row 3-->
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Recipient" Margin="3"/>
-        <ComboBox
-            Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="cmbRecipient"
-            ItemsSource="{Binding recipients}" DisplayMemberPath="FullName" SelectionChanged="cmbRecipient_SelectionChanged"
-        ></ComboBox>
-        <TextBox x:Name="txtNewRecipientFirstName" Grid.Row="3" Grid.Column="2" Visibility="Hidden" Text="First" Margin="3" MinWidth="75"/>
-        <TextBox x:Name="txtNewRecipientLastName" Grid.Row="3" Grid.Column="3" Visibility="Hidden" Text="Last" Margin="3" MinWidth="75"/>
+        <TextBox x:Name="txtNewRecipientFirstName" Grid.Row="3" Grid.Column="2" Text="First" Margin="3" MinWidth="75"/>
+        <TextBox x:Name="txtNewRecipientLastName" Grid.Row="3" Grid.Column="3" Text="Last" Margin="3" MinWidth="75"/>
 
         <TextBlock Grid.Row="3" Grid.Column="4" Text="Address Line 2" Margin="3"/>
         <TextBox Grid.Row="3" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtAddress2"/>
 
         <!--Row 4-->
         <TextBlock Grid.Row="4" Grid.Column="1" Text="Organization" Margin="3"/>
-        <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="txtOrganization"/>
+        <ComboBox
+            Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="cmbOrganization"
+            ItemsSource="{Binding organizations}" DisplayMemberPath="OrganizationName" SelectionChanged="cmbOrganization_SelectionChanged"
+        ></ComboBox>
+        <TextBox MinWidth="150" x:Name="txtNewOrganizationName"  Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Visibility="Hidden"/>
         <TextBlock Grid.Row="4" Grid.Column="4" Text="City" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <TextBox Grid.Row="4" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtCity"/>
 
@@ -76,7 +76,7 @@
         ></ComboBox>
         <TextBox MinWidth="150" x:Name="txtNewPostageTypeName" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="2" Margin="3" Visibility="Collapsed"/>
         <TextBlock Grid.Row="6" Grid.Column="4" Text="Zip Code" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="6" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtZipCode"/>
+        <TextBox Grid.Row="6" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtZip"/>
         
         <!--Row 7-->
         <Button
