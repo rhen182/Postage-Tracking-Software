@@ -71,5 +71,20 @@ namespace WGUCapstoneProject.Models
             //Step x = return the ObservableCollection
             return recipients;
         }
+
+        public static void InsertRecipientToDb(string firstName, string lastName, int organizationId)
+        {
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = conn;
+            command.CommandText = @"INSERT INTO Recipient (FirstName, LastName, OrganizationId)
+                                    VALUES ('" + firstName + "', '" + lastName + "', " + organizationId + ")";
+            conn.Open();
+            command.ExecuteNonQuery();
+            conn.Close();
+        }
     }
 }

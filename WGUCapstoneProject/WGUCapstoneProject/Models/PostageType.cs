@@ -66,5 +66,30 @@ namespace WGUCapstoneProject.Models
             //Step x = return the ObservableCollection
             return postageTypes;
         }
+
+        public static void InsertPostageTypeToDb(string postageTypeName)
+        {
+            //Step 1 - The Connection String
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+
+            //Step 2 - The Connection
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+
+            //Step 3 - The Command
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = conn;
+            command.CommandText = @"INSERT INTO PostageType (PostageTypeName) VALUES ('" + postageTypeName + "')";
+
+            //Step 4 - Open the Connection
+            conn.Open();
+
+            //Step 5 - Execute the Command
+            command.ExecuteNonQuery();
+
+            //Step 6 - Close the Connection
+            conn.Close();
+        }
     }
 }

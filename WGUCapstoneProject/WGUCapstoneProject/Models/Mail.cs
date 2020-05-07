@@ -64,5 +64,35 @@ namespace WGUCapstoneProject.Models
             //Step x = return the ObservableCollection
             return mails;
         }
+
+        public static void InsertPostageToDb(DateTime dateSent, int caseId, double cost, int postageTypeId, int addressId, int recipientId)
+        {
+            //Step 1 - The Connection String
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            //Step 2 - The Connection
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+
+
+
+
+            //Step 3 - The Command
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = conn;
+            command.CommandText = 
+                @"INSERT INTO Mail (CaseName) 
+                  VALUES ('" + dateSent + "', " + caseId + ", " + cost + ", " + postageTypeId + ", " + addressId + ", " + recipientId + ")";
+
+
+
+
+            //Step 4 - Open the Connection
+            conn.Open();
+            //Step 5 - Execute the Command
+            command.ExecuteNonQuery();
+            //Step 6 - Close the Connection
+            conn.Close();
+        }
     }
 }

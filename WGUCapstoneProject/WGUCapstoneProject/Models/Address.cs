@@ -71,6 +71,20 @@ namespace WGUCapstoneProject.Models
             return addresses;
         }
 
+        public static void InsertAddressToDb(string addressLine1, string addressLine2, string city, string state, string zipCode)
+        {
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = conn;
+            command.CommandText = @"INSERT INTO Address (AddressLine1, AddressLine2, City, State, Zip)
+                                    VALUES ('" + addressLine1 + "', '" + addressLine2 + "', '" + city + "', '" + state + "', '" + zipCode + "')";
+            conn.Open();
+            command.ExecuteNonQuery();
+            conn.Close();
+        }
 
 
 

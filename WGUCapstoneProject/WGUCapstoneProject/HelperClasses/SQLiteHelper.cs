@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -59,6 +60,35 @@ namespace WGUCapstoneProject.HelperClasses
                 MessageBox.Show(dataReader);
             }
             conn.Close();
+        }
+
+        public static int SelectIdValue(string idColumn, string sourceTable, string targetTable)
+        {
+            //Step 1 - The Connection String
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+
+            //Step 2 - The Connection
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+
+            //Step 3 - Command
+            SqliteCommand command = new SqliteCommand();
+            command.CommandText = @"SELECT " + idColumn + " FROM " + sourceTable + " WHERE " + idColumn + " = (SELECT " + idColumn + "FROM " + targetTable + ")";
+            command.Connection = conn;
+
+            //Step 4 - Open conn
+            conn.Open();
+
+            //Step 5 - execute command
+            int id = Convert.ToInt32(command.ExecuteScalar());
+
+            //Step 6 - Clean Up
+            command.Dispose();
+            conn.Close();
+
+            //Step 7 - return data
+            return id;
         }
     }
 }
