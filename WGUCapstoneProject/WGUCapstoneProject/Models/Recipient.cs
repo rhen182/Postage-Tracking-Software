@@ -70,7 +70,7 @@ namespace WGUCapstoneProject.Models
             return recipients;
         }
 
-        public static void InsertRecipientToDb(string firstName, string lastName, int organizationId)
+        public static void InsertRecipientToDb(string firstName, string lastName)
         {
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
             connStringBuilder.DataSource = SQLiteHelper.dbDir;
@@ -78,8 +78,8 @@ namespace WGUCapstoneProject.Models
             conn.ConnectionString = connStringBuilder.ToString();
             SqliteCommand command = new SqliteCommand();
             command.Connection = conn;
-            command.CommandText = @"INSERT INTO Recipient (FirstName, LastName, OrganizationId)
-                                    VALUES ('" + firstName + "', '" + lastName + "', " + organizationId + ")";
+            command.CommandText = @"INSERT INTO Recipient (FirstName, LastName)
+                                    VALUES ('" + firstName + "', '" + lastName + ")";
             conn.Open();
             command.ExecuteNonQuery();
             conn.Close();

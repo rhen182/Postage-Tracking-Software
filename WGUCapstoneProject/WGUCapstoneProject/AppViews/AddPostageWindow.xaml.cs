@@ -123,6 +123,11 @@ namespace WGUCapstoneProject.AppViews
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
                 mail.OrganizationId = organization.OrganizationId;
             }
+
+            recipient.FirstName = txtNewRecipientFirstName.Text;
+            recipient.LastName = txtNewRecipientLastName.Text;
+            Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
+            
             mail.DateSent = DateTime.Now;
             mail.Cost = Convert.ToDouble(txtCost.Text);
             
