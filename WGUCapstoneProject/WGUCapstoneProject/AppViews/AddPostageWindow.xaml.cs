@@ -95,44 +95,53 @@ namespace WGUCapstoneProject.AppViews
             {
                 legalCase = (Case)cmbCase.SelectedItem;
                 mail.CaseId = legalCase.CaseId;
+                MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
             else
             {
                 legalCase.CaseName = txtNewCaseName.Text;
                 Case.InsertCaseToDb(legalCase.CaseName);
                 mail.CaseId = legalCase.CaseId;
+                MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
-
-
             if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
             {
                 postageType = (PostageType)cmbPostageType.SelectedItem;
                 mail.PostageTypeId = postageType.PostageTypeId;
+                MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             else
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
                 mail.PostageTypeId = postageType.PostageTypeId;
+                MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
                 mail.OrganizationId = organization.OrganizationId;
+                MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
             else
             {
                 organization.OrganizationName = txtNewOrganizationName.Text;
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
                 mail.OrganizationId = organization.OrganizationId;
+                MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
 
             recipient.FirstName = txtNewRecipientFirstName.Text;
             recipient.LastName = txtNewRecipientLastName.Text;
-            Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
-            
+            MessageBox.Show("RecipientId = " + mail.RecipientId.ToString());
 
-            
+
+            Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
+
+            List<Recipient> recs = new List<Recipient>();
+
+            mail.RecipientId = Recipient.RecipientObservableCollection().ToList().Max(x => x.RecipientId);
+
             Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
         }

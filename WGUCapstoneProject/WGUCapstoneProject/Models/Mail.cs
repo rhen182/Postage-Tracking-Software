@@ -81,7 +81,7 @@ namespace WGUCapstoneProject.Models
                 command.Connection = conn;
                 command.CommandText =
                     @"INSERT INTO Mail (DateSent, Cost, CaseId, PostageTypeId, OrganizationId, RecipientId) 
-                  VALUES ('" + dateSent + "', " + cost + ", " + caseId + ", " + postageTypeId + ", " + organizationId + ", " + recipientId + ")";
+                      VALUES ('" + dateSent + "', " + cost + ", " + caseId + ", " + postageTypeId + ", " + organizationId + ", " + recipientId + ");";
                 //Step 4 - Open the Connection
                 conn.Open();
                 //Step 5 - Execute the Command
