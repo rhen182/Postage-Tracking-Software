@@ -37,37 +37,40 @@ namespace WGUCapstoneProject.Models
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
 
-            //Step 3 - Command
-            SqliteCommand command = new SqliteCommand();
-            command.CommandText = "SELECT * FROM Recipient";
-            command.Connection = conn;
-
-            //Step 4 - Open connection
-            conn.Open();
-
-            //Step 5 - Execute Command
-            SqliteDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
+            using (conn)
             {
-                while (reader.Read())
+                //Step 3 - Command
+                SqliteCommand command = new SqliteCommand();
+                command.CommandText = "SELECT * FROM Recipient";
+                command.Connection = conn;
+
+                //Step 4 - Open connection
+                conn.Open();
+
+                //Step 5 - Execute Command
+                SqliteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    Recipient recipient = new Recipient();
-                    recipient.RecipientId = reader.GetInt32(0);
-                    recipient.FirstName = reader.GetString(1);
-                    recipient.LastName = reader.GetString(2);
-                    recipients.Add(recipient);
+                    while (reader.Read())
+                    {
+                        Recipient recipient = new Recipient();
+                        recipient.RecipientId = reader.GetInt32(0);
+                        recipient.FirstName = reader.GetString(1);
+                        recipient.LastName = reader.GetString(2);
+                        recipients.Add(recipient);
+                    }
                 }
-            }
-            else
-            {
-                return null;
-            }
+                else
+                {
+                    return null;
+                }
 
-            //Step x = Close Connection
-            conn.Close();
+                //Step x = Close Connection
+                conn.Close();
 
-            //Step x = return the ObservableCollection
-            return recipients;
+                //Step x = return the ObservableCollection
+                return recipients;
+            }
         }
 
         public static void InsertRecipientToDb(string firstName, string lastName)
@@ -76,13 +79,15 @@ namespace WGUCapstoneProject.Models
             connStringBuilder.DataSource = SQLiteHelper.dbDir;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
-            SqliteCommand command = new SqliteCommand();
-            command.Connection = conn;
-            command.CommandText = @"INSERT INTO Recipient (FirstName, LastName)
-                                    VALUES ('" + firstName + "', '" + lastName + ")";
-            conn.Open();
-            command.ExecuteNonQuery();
-            conn.Close();
+            using (conn)
+            {
+                SqliteCommand command = new SqliteCommand();
+                command.Connection = conn;
+                command.CommandText = @"INSERT INTO Recipient (FirstName, LastName)
+                                    VALUES ('" + firstName + "', '" + lastName + "')";
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

@@ -33,37 +33,38 @@ namespace WGUCapstoneProject.Models
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
-
-            //Step 3 - Command
-            SqliteCommand command = new SqliteCommand();
-            command.CommandText = "SELECT * FROM LegalCase";
-            command.Connection = conn;
-
-            //Step 4 - Open connection
-            conn.Open();
-
-            //Step 5 - Execute Command
-            SqliteDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
+            using (conn)
             {
-                while (reader.Read())
+                //Step 3 - Command
+                SqliteCommand command = new SqliteCommand();
+                command.CommandText = "SELECT * FROM LegalCase";
+                command.Connection = conn;
+
+                //Step 4 - Open connection
+                conn.Open();
+
+                //Step 5 - Execute Command
+                SqliteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    Case legalCase = new Case();
-                    legalCase.CaseId = reader.GetInt32(0);
-                    legalCase.CaseName = reader.GetString(1);
-                    cases.Add(legalCase);
+                    while (reader.Read())
+                    {
+                        Case legalCase = new Case();
+                        legalCase.CaseId = reader.GetInt32(0);
+                        legalCase.CaseName = reader.GetString(1);
+                        cases.Add(legalCase);
+                    }
                 }
-            }
-            else
-            {
-                return null;
-            }
+                else
+                {
+                    return null;
+                }
 
-            //Step x = Close Connection
-            conn.Close();
+                //Step x = Close Connection
 
-            //Step x = return the ObservableCollection
-            return cases;
+                //Step x = return the ObservableCollection
+                return cases;
+            }
         }
 
         public static void InsertCaseToDb(string legalCaseName)
@@ -75,20 +76,21 @@ namespace WGUCapstoneProject.Models
             //Step 2 - The Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
+            using (conn)
+            {
+                //Step 3 - The Command
+                SqliteCommand command = new SqliteCommand();
+                command.Connection = conn;
+                command.CommandText = @"INSERT INTO LegalCase (CaseName) VALUES ('" + legalCaseName + "')";
 
-            //Step 3 - The Command
-            SqliteCommand command = new SqliteCommand();
-            command.Connection = conn;
-            command.CommandText = @"INSERT INTO LegalCase (CaseName) VALUES ('" + legalCaseName + "')";
+                //Step 4 - Open the Connection
+                conn.Open();
 
-            //Step 4 - Open the Connection
-            conn.Open();
+                //Step 5 - Execute the Command
+                command.ExecuteNonQuery();
 
-            //Step 5 - Execute the Command
-            command.ExecuteNonQuery();
-
-            //Step 6 - Close the Connection
-            conn.Close();
+                //Step 6 - Close the Connection
+            }
         }
     }
 }

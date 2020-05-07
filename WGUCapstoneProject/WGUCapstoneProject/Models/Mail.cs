@@ -27,45 +27,46 @@ namespace WGUCapstoneProject.Models
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
-
-            //Step 3 - Command
-            SqliteCommand command = new SqliteCommand();
-            command.CommandText = "SELECT * FROM Mail";
-            command.Connection = conn;
-
-            //Step 4 - Open connection
-            conn.Open();
-
-            //Step 5 - Execute Command
-            SqliteDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
+            using (conn)
             {
-                while (reader.Read())
+                //Step 3 - Command
+                SqliteCommand command = new SqliteCommand();
+                command.CommandText = "SELECT * FROM Mail";
+                command.Connection = conn;
+
+                //Step 4 - Open connection
+                conn.Open();
+
+                //Step 5 - Execute Command
+                SqliteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    Mail mail = new Mail();
-                    mail.MailId = reader.GetInt32(0);
-                    mail.DateSent = reader.GetDateTime(1);
-                    mail.CaseId = reader.GetInt32(2);
-                    mail.Cost = reader.GetDouble(3);
-                    mail.PostageTypeId = reader.GetInt32(4);
-                    mail.OrganizationId = reader.GetInt32(5);
-                    mail.RecipientId = reader.GetInt32(6);
-                    mails.Add(mail);
+                    while (reader.Read())
+                    {
+                        Mail mail = new Mail();
+                        mail.MailId = reader.GetInt32(0);
+                        mail.DateSent = reader.GetDateTime(1);
+                        mail.CaseId = reader.GetInt32(2);
+                        mail.Cost = reader.GetDouble(3);
+                        mail.PostageTypeId = reader.GetInt32(4);
+                        mail.OrganizationId = reader.GetInt32(5);
+                        mail.RecipientId = reader.GetInt32(6);
+                        mails.Add(mail);
+                    }
                 }
-            }
-            else
-            {
-                return null;
-            }
+                else
+                {
+                    return null;
+                }
 
-            //Step x = Close Connection
-            conn.Close();
+                //Step x = Close Connection
 
-            //Step x = return the ObservableCollection
-            return mails;
+                //Step x = return the ObservableCollection
+                return mails;
+            }
         }
 
-        public static void InsertPostageToDb(DateTime dateSent, int caseId, double cost, int postageTypeId, int organizationId, int recipientId)
+        public static void InsertPostageToDb(DateTime dateSent, double cost, int caseId, int postageTypeId, int organizationId, int recipientId)
         {
             //Step 1 - The Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
@@ -73,26 +74,20 @@ namespace WGUCapstoneProject.Models
             //Step 2 - The Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
-
-
-
-
-            //Step 3 - The Command
-            SqliteCommand command = new SqliteCommand();
-            command.Connection = conn;
-            command.CommandText = 
-                @"INSERT INTO Mail (CaseName) 
-                  VALUES ('" + dateSent + "', " + caseId + ", " + cost + ", " + postageTypeId + ", " + organizationId + ", " + recipientId + ")";
-
-
-
-
-            //Step 4 - Open the Connection
-            conn.Open();
-            //Step 5 - Execute the Command
-            command.ExecuteNonQuery();
-            //Step 6 - Close the Connection
-            conn.Close();
+            using (conn)
+            {
+                //Step 3 - The Command
+                SqliteCommand command = new SqliteCommand();
+                command.Connection = conn;
+                command.CommandText =
+                    @"INSERT INTO Mail (DateSent, Cost, CaseId, PostageTypeId, OrganizationId, RecipientId) 
+                  VALUES ('" + dateSent + "', " + cost + ", " + caseId + ", " + postageTypeId + ", " + organizationId + ", " + recipientId + ")";
+                //Step 4 - Open the Connection
+                conn.Open();
+                //Step 5 - Execute the Command
+                command.ExecuteNonQuery();
+                //Step 6 - Close the Connection
+            }
         }
     }
 }

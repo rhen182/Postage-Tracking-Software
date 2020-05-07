@@ -28,42 +28,43 @@ namespace WGUCapstoneProject.Models
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
-
-            //Step 3 - Command
-            SqliteCommand command = new SqliteCommand();
-            command.CommandText = "SELECT * FROM Organization";
-            command.Connection = conn;
-
-            //Step 4 - Open connection
-            conn.Open();
-
-            //Step 5 - Execute Command
-            SqliteDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
+            using (conn)
             {
-                while (reader.Read())
+                //Step 3 - Command
+                SqliteCommand command = new SqliteCommand();
+                command.CommandText = "SELECT * FROM Organization";
+                command.Connection = conn;
+
+                //Step 4 - Open connection
+                conn.Open();
+
+                //Step 5 - Execute Command
+                SqliteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    Organization organization = new Organization();
-                    organization.OrganizationId = reader.GetInt32(0);
-                    organization.OrganizationName = reader.GetString(1);
-                    organization.AddressLine1 = reader.GetString(2);
-                    organization.AddressLine2 = reader.GetString(3);
-                    organization.City = reader.GetString(4);
-                    organization.State = reader.GetString(5);
-                    organization.Zip = reader.GetString(6);
-                    organizations.Add(organization);
+                    while (reader.Read())
+                    {
+                        Organization organization = new Organization();
+                        organization.OrganizationId = reader.GetInt32(0);
+                        organization.OrganizationName = reader.GetString(1);
+                        organization.AddressLine1 = reader.GetString(2);
+                        organization.AddressLine2 = reader.GetString(3);
+                        organization.City = reader.GetString(4);
+                        organization.State = reader.GetString(5);
+                        organization.Zip = reader.GetString(6);
+                        organizations.Add(organization);
+                    }
                 }
-            }
-            else
-            {
-                return null;
-            }
+                else
+                {
+                    return null;
+                }
 
-            //Step x = Close Connection
-            conn.Close();
+                //Step x = Close Connection
 
-            //Step x = return the ObservableCollection
-            return organizations;
+                //Step x = return the ObservableCollection
+                return organizations;
+            }
         }
 
         public Organization()
@@ -80,13 +81,15 @@ namespace WGUCapstoneProject.Models
             connStringBuilder.DataSource = SQLiteHelper.dbDir;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
-            SqliteCommand command = new SqliteCommand();
-            command.Connection = conn;
-            command.CommandText = @"INSERT INTO Organization (OrganizationName, AddressLine1, AddressLine2, City, State, Zip)
+            using (conn)
+            {
+                SqliteCommand command = new SqliteCommand();
+                command.Connection = conn;
+                command.CommandText = @"INSERT INTO Organization (OrganizationName, AddressLine1, AddressLine2, City, State, Zip)
                                     VALUES ('" + organizationName + "', '" + addressLine1 + "', '" + addressLine2 + "', '" + city + "', '" + state + "', '" + zip + "')";
-            conn.Open();
-            command.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

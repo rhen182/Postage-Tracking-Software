@@ -88,6 +88,9 @@ namespace WGUCapstoneProject.AppViews
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+            mail.DateSent = DateTime.Now;
+            mail.Cost = Convert.ToDouble(txtCost.Text);
+
             if (String.IsNullOrEmpty(txtNewCaseName.Text))
             {
                 legalCase = (Case)cmbCase.SelectedItem;
@@ -99,6 +102,7 @@ namespace WGUCapstoneProject.AppViews
                 Case.InsertCaseToDb(legalCase.CaseName);
                 mail.CaseId = legalCase.CaseId;
             }
+
 
             if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
             {
@@ -114,7 +118,6 @@ namespace WGUCapstoneProject.AppViews
             if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
-                Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
                 mail.OrganizationId = organization.OrganizationId;
             }
             else
@@ -128,10 +131,9 @@ namespace WGUCapstoneProject.AppViews
             recipient.LastName = txtNewRecipientLastName.Text;
             Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
             
-            mail.DateSent = DateTime.Now;
-            mail.Cost = Convert.ToDouble(txtCost.Text);
+
             
-            Mail.InsertPostageToDb(mail.DateSent, mail.CaseId, mail.Cost, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
+            Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
         }
 
