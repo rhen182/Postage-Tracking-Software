@@ -38,59 +38,62 @@
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Case" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <ComboBox 
             Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="cmbCase"
-            ItemsSource="{Binding caseList}" DisplayMemberPath="CaseName" SelectionChanged="cmbCase_SelectionChanged" 
+            ItemsSource="{Binding caseList}" DisplayMemberPath="CaseName" SelectionChanged="cmbCase_SelectionChanged"
+            KeyboardNavigation.TabIndex="0"
         ></ComboBox>
         <TextBox MinWidth="150" x:Name="txtNewCaseName"  Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2" Visibility="Hidden"/>
         <TextBlock Grid.Row="2" Grid.Column="4" Text="Address Line 1" Margin="3"/>
-        <TextBox Grid.Row="2" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtAddress1"/>
+        <TextBox Grid.Row="2" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtAddress1" KeyboardNavigation.TabIndex="6"/>
 
         <!--Row 3-->
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Recipient" Margin="3"/>
-        <TextBox x:Name="txtNewRecipientFirstName" Grid.Row="3" Grid.Column="2" Text="First" Margin="3" MinWidth="75"/>
-        <TextBox x:Name="txtNewRecipientLastName" Grid.Row="3" Grid.Column="3" Text="Last" Margin="3" MinWidth="75"/>
+        <TextBox x:Name="txtNewRecipientFirstName" Grid.Row="3" Grid.Column="2" Text="First" Margin="3" MinWidth="75" KeyboardNavigation.TabIndex="1"/>
+        <TextBox x:Name="txtNewRecipientLastName" Grid.Row="3" Grid.Column="3" Text="Last" Margin="3" MinWidth="75" KeyboardNavigation.TabIndex="2"/>
 
         <TextBlock Grid.Row="3" Grid.Column="4" Text="Address Line 2" Margin="3"/>
-        <TextBox Grid.Row="3" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtAddress2"/>
+        <TextBox Grid.Row="3" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtAddress2" KeyboardNavigation.TabIndex="7"/>
 
         <!--Row 4-->
         <TextBlock Grid.Row="4" Grid.Column="1" Text="Organization" Margin="3"/>
         <ComboBox
             Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="cmbOrganization"
             ItemsSource="{Binding organizations}" DisplayMemberPath="OrganizationName" SelectionChanged="cmbOrganization_SelectionChanged"
+            KeyboardNavigation.TabIndex="3"
         ></ComboBox>
         <TextBox MinWidth="150" x:Name="txtNewOrganizationName"  Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Visibility="Hidden"/>
         <TextBlock Grid.Row="4" Grid.Column="4" Text="City" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="4" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtCity"/>
+        <TextBox Grid.Row="4" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtCity" KeyboardNavigation.TabIndex="8"/>
 
         <!--Row 5-->
         <TextBlock Grid.Row="5" Grid.Column="1" Text="Cost" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="txtCost"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="txtCost" KeyboardNavigation.TabIndex="4"/>
         <TextBlock Grid.Row="5" Grid.Column="4" Text="State" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="5" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtState"/>
+        <TextBox Grid.Row="5" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtState" KeyboardNavigation.TabIndex="9"/>
 
         <!--Row 6-->
         <TextBlock Grid.Row="6" Grid.Column="1" Text="Postage Type" Margin="3"/>
         <ComboBox
             Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" MinWidth="150" Margin="3" x:Name="cmbPostageType"
             ItemsSource="{Binding postageTypes}" DisplayMemberPath="PostageTypeName" SelectionChanged="cmbPostageType_SelectionChanged"
+            KeyboardNavigation.TabIndex="5"
         ></ComboBox>
         <TextBox MinWidth="150" x:Name="txtNewPostageTypeName" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="2" Margin="3" Visibility="Collapsed"/>
         <TextBlock Grid.Row="6" Grid.Column="4" Text="Zip Code" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="6" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtZip"/>
+        <TextBox Grid.Row="6" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtZip" KeyboardNavigation.TabIndex="10"/>
         
         <!--Row 7-->
         <Button
             x:Name="btnCancel" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="7"
-            Content="Cancel" Margin="3" Click="BtnCancel_Click"
+            Content="Cancel" Margin="3" Click="BtnCancel_Click" KeyboardNavigation.TabIndex="12"
         ></Button>
         <Button
             x:Name="btnAdd" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="7" Grid.RowSpan="2"
-            Content="Confirm" Margin="3" Click="BtnAdd_Click"
+            Content="Confirm" Margin="3" Click="BtnAdd_Click" KeyboardNavigation.TabIndex="11"
         ></Button>
         
         <!--Row 8-->
         <Button
-            x:Name="btnReset" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Content="Reset" Margin="3"
+            x:Name="btnReset" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Content="Reset" Margin="3" Click="btnReset_Click" KeyboardNavigation.TabIndex="13"
         ></Button>
     </Grid>
     

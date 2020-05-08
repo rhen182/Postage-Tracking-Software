@@ -96,34 +96,34 @@ namespace WGUCapstoneProject.AppViews
                 legalCase = (Case)cmbCase.SelectedItem;
                 mail.CaseId = legalCase.CaseId;
                 mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
-                MessageBox.Show("CaseId = " + mail.CaseId.ToString());
+                //MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
             else
             {
                 legalCase.CaseName = txtNewCaseName.Text;
                 Case.InsertCaseToDb(legalCase.CaseName);
                 mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
-                MessageBox.Show("CaseId = " + mail.CaseId.ToString());
+                //MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
             if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
             {
                 postageType = (PostageType)cmbPostageType.SelectedItem;
                 mail.PostageTypeId = postageType.PostageTypeId;
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
-                MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
+                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             else
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
-                MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
+                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
-                MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
+                //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
             else
             {
@@ -135,12 +135,12 @@ namespace WGUCapstoneProject.AppViews
                 organization.Zip = txtZip.Text;
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
-                MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
+                //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
 
             recipient.FirstName = txtNewRecipientFirstName.Text;
             recipient.LastName = txtNewRecipientLastName.Text;
-            MessageBox.Show("RecipientId = " + mail.RecipientId.ToString());
+            //MessageBox.Show("RecipientId = " + mail.RecipientId.ToString());
 
 
             Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
@@ -191,6 +191,36 @@ namespace WGUCapstoneProject.AppViews
                 txtState.Text = organization.State;
                 txtZip.Text = organization.Zip;
             }
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmbCase.Visibility == Visibility.Collapsed && Case.CaseObservableCollection() != null)
+            {
+                cmbCase.Visibility = Visibility.Visible;
+                txtNewCaseName.Visibility = Visibility.Collapsed;
+            }
+            if (cmbOrganization.Visibility == Visibility.Collapsed && Organization.OrganizationObservableCollection() != null)
+            {
+                cmbOrganization.Visibility = Visibility.Visible;
+                txtNewOrganizationName.Visibility = Visibility.Collapsed;
+            }
+            if (cmbPostageType.Visibility == Visibility.Collapsed && PostageType.PostageTypeObservableCollection() != null)
+            {
+                cmbPostageType.Visibility = Visibility.Visible;
+                txtNewPostageTypeName.Visibility = Visibility.Collapsed;
+            }
+            cmbCase.SelectedIndex = 1;
+            cmbOrganization.SelectedIndex = 1;
+            cmbPostageType.SelectedIndex = 1;
+            txtNewRecipientFirstName.Text = "";
+            txtNewRecipientLastName.Text = "";
+            txtCost.Text = "";
+            txtAddress1.Text = "";
+            txtAddress2.Text = "";
+            txtCity.Text = "";
+            txtState.Text = "";
+            txtZip.Text = "";
         }
     }
 }
