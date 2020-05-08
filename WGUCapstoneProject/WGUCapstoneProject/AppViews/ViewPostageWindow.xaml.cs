@@ -30,15 +30,29 @@ namespace WGUCapstoneProject.AppViews
             InitializeComponent();
             RefreshPostageDataToGrid(postageDataGrid);
         }
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
-
+            RefreshPostageDataToGrid(postageDataGrid);
         }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            SQLiteConnection conn = new SQLiteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+            using (conn)
+            {
+                SQLiteCommand command = new SQLiteCommand();
+                command.Connection = conn;
+                command.CommandText = @"DELETE FROM Mail; DELETE FROM LegalCase; DELETE FROM Organization; DELETE FROM PostageType; DELETE FROM Recipient; DELETE FROM sqlite_sequence;";
+                conn.Open();
+                command.ExecuteNonQuery();
+                RefreshPostageDataToGrid(postageDataGrid);
+            }
+        }
+
+
 
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {

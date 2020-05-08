@@ -78,14 +78,12 @@ namespace WGUCapstoneProject.AppViews
             }
             DataContext = this;
         }
-
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             ViewPostageWindow viewPostage = new ViewPostageWindow();
             Close();
             viewPostage.Show();
         }
-
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             mail.DateSent = DateTime.Now;
@@ -151,6 +149,9 @@ namespace WGUCapstoneProject.AppViews
 
             Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
+            ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
+            Close();
+            viewPostageWindow.Show();
         }
 
         private void cmbCase_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -222,5 +223,102 @@ namespace WGUCapstoneProject.AppViews
             txtState.Text = "";
             txtZip.Text = "";
         }
+
+        private void txtNewCaseName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtNewCaseName != null)
+            {
+                txtNewCaseName.SelectAll();
+            }
+        }
+
+        private void txtNewRecipientFirstName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtNewRecipientFirstName != null)
+            {
+                txtNewRecipientFirstName.SelectAll();
+            }
+        }
+
+        private void txtNewRecipientLastName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtNewRecipientLastName != null)
+            {
+                txtNewRecipientLastName.SelectAll();
+            }
+        }
+
+        private void txtNewOrganizationName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtNewOrganizationName != null)
+            {
+                txtNewOrganizationName.SelectAll();
+            }
+        }
+
+        private void txtCost_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtCost != null)
+            {
+                txtCost.SelectAll();
+            }
+        }
+
+        private void txtNewPostageTypeName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtNewPostageTypeName != null)
+            {
+                txtNewPostageTypeName.SelectAll();
+            }
+        }
+
+        private void txtAddress1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtAddress1 != null)
+            {
+                txtAddress1.SelectAll();
+            }
+        }
+
+        private void txtAddress2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtAddress2 != null)
+            {
+                txtAddress2.SelectAll();
+            }
+        }
+
+        private void txtCity_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtCity != null)
+            {
+                txtCity.SelectAll();
+            }
+        }
+
+        private void txtState_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtState != null)
+            {
+                txtState.SelectAll();
+            }
+        }
+
+        private void txtZip_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtZip != null)
+            {
+                txtZip.SelectAll();
+            }
+        }
     }
 }
+
+/*
+private static void SelectAllText(object sender, RoutedEventArgs e)
+{
+    var textBox = e.OriginalSource as TextBox;
+    if (textBox != null)
+        textBox.SelectAll();
+} 
+*/
