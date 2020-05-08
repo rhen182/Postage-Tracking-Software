@@ -95,39 +95,46 @@ namespace WGUCapstoneProject.AppViews
             {
                 legalCase = (Case)cmbCase.SelectedItem;
                 mail.CaseId = legalCase.CaseId;
+                mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
                 MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
             else
             {
                 legalCase.CaseName = txtNewCaseName.Text;
                 Case.InsertCaseToDb(legalCase.CaseName);
-                mail.CaseId = legalCase.CaseId;
+                mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
                 MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
             if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
             {
                 postageType = (PostageType)cmbPostageType.SelectedItem;
                 mail.PostageTypeId = postageType.PostageTypeId;
+                mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
                 MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             else
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
-                mail.PostageTypeId = postageType.PostageTypeId;
+                mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
                 MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
-                mail.OrganizationId = organization.OrganizationId;
+                mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
                 MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
             else
             {
                 organization.OrganizationName = txtNewOrganizationName.Text;
+                organization.AddressLine1 = txtAddress1.Text;
+                organization.AddressLine2 = txtAddress2.Text;
+                organization.City = txtCity.Text;
+                organization.State = txtState.Text;
+                organization.Zip = txtZip.Text;
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
-                mail.OrganizationId = organization.OrganizationId;
+                mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
                 MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
 
