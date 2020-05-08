@@ -26,44 +26,59 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="3" Grid.RowSpan="3" Grid.Row="1" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False" HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False" SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mail ID" Binding="{Binding MailId}"/>
+                    <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Organization" Binding="{Binding OrganizationName}"/>
+                    <DataGridTextColumn Header="Cost" Binding="{Binding Cost}"/>
+                    <DataGridTextColumn Header="Postage Type" Binding="{Binding PostageTypeName}"/>
+                    <DataGridTextColumn Header="Date Sent" Binding="{Binding DateSent}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
         <!--Row 1-->
-        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Mail ID" Binding="{Binding MailId}"/>
-                <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Organization" Binding="{Binding OrganizationName}"/>
-                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}"/>
-                <DataGridTextColumn Header="Postage Type" Binding="{Binding PostageTypeName}"/>
-                <DataGridTextColumn Header="Date Sent" Binding="{Binding DateSent}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <!--Row 2-->
-        <Button
-            Grid.Column="1" Grid.Row="2"
-            x:Name="btnDelete"
-            Content="Delete All"
-            Click="BtnDelete_Click"
-        ></Button>
-        <Button
-            Grid.Column="2" Grid.Row="2"
-            x:Name="btnDeleteOne"
-            Content="Delete One"
-            Click="BtnDeleteOne_Click"
-        ></Button>
-        <!--Row 3-->
-        <Button
-            Grid.Column="1" Grid.Row="3"
-            x:Name="btnAdd"
-            Content="Add Postage"
-            Click="BtnAdd_Click"
-        ></Button>
-        <Button
-            Grid.Column="2" Grid.Row="3"
-            x:Name="btnRefresh"
-            Content="Refresh"
-            Click="BtnRefresh_Click"
-        ></Button>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button
+                Grid.Column="1" Grid.Row="1"
+                x:Name="btnAdd"
+                Content="Add Postage"
+                Click="BtnAdd_Click"
+                Margin="3"
+            ></Button>
+            <Button
+                x:Name="btnModify"
+                Content="Modify Postage"
+                Margin="3"
+                Click="btnModify_Click"
+            ></Button>
+            <!--Row 2-->
+            <Button
+                Grid.Column="2" Grid.Row="2"
+                x:Name="btnDeleteOne"
+                Content="Delete One"
+                Click="BtnDeleteOne_Click"
+                Margin="3"
+            ></Button>
+            <Button
+                Grid.Column="1" Grid.Row="2"
+                x:Name="btnDelete"
+                Content="Delete All"
+                Click="BtnDelete_Click"
+                Margin="3"
+            ></Button>
+            <!--Row 3-->
+            <Button
+                Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"
+                x:Name="btnRefresh"
+                Content="Refresh"
+                Click="BtnRefresh_Click"
+                Margin="3"
+            ></Button>
+        </StackPanel>
+
     </Grid>
 </Window>

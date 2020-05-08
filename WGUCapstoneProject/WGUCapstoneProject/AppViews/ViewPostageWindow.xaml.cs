@@ -25,6 +25,7 @@ namespace WGUCapstoneProject.AppViews
     /// </summary>
     public partial class ViewPostageWindow : Window
     {
+
         public ViewPostageWindow()
         {
             InitializeComponent();
@@ -57,6 +58,28 @@ namespace WGUCapstoneProject.AppViews
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
 
+            //Select Values From Datagrid
+            Mail selectedMail = new Mail();
+
+            selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
+
+            //MessageBox.Show(selectedMail.MailId.ToString());
+
+            //Delete Single Mail from DB
+
+            SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            SQLiteConnection conn = new SQLiteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+            using (conn)
+            {
+                SQLiteCommand command = new SQLiteCommand();
+                command.Connection = conn;
+                command.CommandText = @"DELETE FROM Mail WHERE MailId = " + selectedMail.MailId + ";";
+                conn.Open();
+                command.ExecuteNonQuery();
+                RefreshPostageDataToGrid(postageDataGrid);
+            }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -85,6 +108,14 @@ namespace WGUCapstoneProject.AppViews
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnModify_Click(object sender, RoutedEventArgs e)
+        {
+            Mail selectedMail = new Mail();
+            selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
+
+            ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(selectedMail.MailId);
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿<Window x:Class="WGUCapstoneProject.AppViews.AddPostageWindow"
+﻿<Window x:Class="WGUCapstoneProject.AppViews.ModifyPostageWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WGUCapstoneProject.AppViews"
         mc:Ignorable="d"
-        Title="AddPostageWindow" Height="450" Width="500">
-    
+        Title="ModifyPostageWindow" Height="450" Width="500">
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="auto"/>
@@ -31,10 +30,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        
+
         <!--Row 1-->
-        <TextBlock Text="Add Postage" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" HorizontalAlignment="Center"/>
-        
+        <TextBlock Text="Modify Postage" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" HorizontalAlignment="Center"/>
+
         <!--Row 2-->
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Case" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <ComboBox 
@@ -81,21 +80,15 @@
         <TextBox GotFocus="txtNewPostageTypeName_GotFocus" MinWidth="150" x:Name="txtNewPostageTypeName" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="2" Margin="3" Visibility="Collapsed" KeyboardNavigation.TabIndex="5"/>
         <TextBlock Grid.Row="6" Grid.Column="4" Text="Zip Code" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <TextBox GotFocus="txtZip_GotFocus" Grid.Row="6" Grid.Column="5" MinWidth="150" Margin="3" x:Name="txtZip" KeyboardNavigation.TabIndex="10"/>
-        
+
         <!--Row 7-->
         <Button
             x:Name="btnCancel" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="7"
-            Content="Cancel" Margin="3" Click="BtnCancel_Click" KeyboardNavigation.TabIndex="12"
+            Content="Cancel" Margin="3" Click="btnCancel_Click" KeyboardNavigation.TabIndex="12"
         ></Button>
         <Button
             x:Name="btnAdd" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="7" Grid.RowSpan="2"
-            Content="Confirm" Margin="3" Click="BtnAdd_Click" KeyboardNavigation.TabIndex="11"
-        ></Button>
-        
-        <!--Row 8-->
-        <Button
-            x:Name="btnReset" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Content="Reset" Margin="3" Click="btnReset_Click" KeyboardNavigation.TabIndex="13"
+            Content="Confirm" Margin="3" Click="btnAdd_Click" KeyboardNavigation.TabIndex="11"
         ></Button>
     </Grid>
-    
 </Window>
