@@ -16,6 +16,16 @@ namespace WGUCapstoneProject.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
+
+        public Organization()
+        {
+
+        }
+        public Organization(string organizationName)
+        {
+            OrganizationName = organizationName;
+        }
+
         public static ObservableCollection<Organization> OrganizationObservableCollection()
         {
             //Step 1 - define the observable collection
@@ -67,14 +77,7 @@ namespace WGUCapstoneProject.Models
             }
         }
 
-        public Organization()
-        {
 
-        }
-        public Organization(string organizationName)
-        {
-            OrganizationName = organizationName;
-        }
         public static void InsertOrganizationToDb(string organizationName, string addressLine1, string addressLine2, string city, string state, string zip)
         {
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
@@ -86,7 +89,7 @@ namespace WGUCapstoneProject.Models
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = conn;
                 command.CommandText = @"INSERT INTO Organization (OrganizationName, AddressLine1, AddressLine2, City, State, Zip)
-                                    VALUES ('" + organizationName + "', '" + addressLine1 + "', '" + addressLine2 + "', '" + city + "', '" + state + "', '" + zip + "')";
+                                        VALUES ('" + organizationName + "', '" + addressLine1 + "', '" + addressLine2 + "', '" + city + "', '" + state + "', '" + zip + "')";
                 conn.Open();
                 command.ExecuteNonQuery();
             }

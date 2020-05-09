@@ -26,6 +26,7 @@ namespace WGUCapstoneProject.AppViews
         public ObservableCollection<Recipient> recipients { get; set; }
         public ObservableCollection<PostageType> postageTypes { get; set; }
         public ObservableCollection<Organization> organizations { get; set; }
+
         public Case newCase = new Case("New Case");
         public Recipient newRecipient = new Recipient("New", "Recipient");
         public PostageType newPostageType = new PostageType("New Postage Type");
@@ -36,7 +37,7 @@ namespace WGUCapstoneProject.AppViews
         PostageType postageType = new PostageType();
         Recipient recipient = new Recipient();
         Organization organization = new Organization();
-
+        
         public AddPostageWindow()
         {
             InitializeComponent();
@@ -113,13 +114,16 @@ namespace WGUCapstoneProject.AppViews
             else
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
+
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
+
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
                 //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
+                mail.OrganizationId = postageType.PostageTypeId;
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
                 //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
@@ -131,7 +135,9 @@ namespace WGUCapstoneProject.AppViews
                 organization.City = txtCity.Text;
                 organization.State = txtState.Text;
                 organization.Zip = txtZip.Text;
+
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
+
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
                 //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
@@ -149,9 +155,11 @@ namespace WGUCapstoneProject.AppViews
 
             Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
-            ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-            Close();
-            viewPostageWindow.Show();
+            //!!!!!!!!!!!!!!!!!!!
+            //Temporarily disabled for easier testing
+            //ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
+            //Close();
+            //viewPostageWindow.Show();
         }
 
         private void cmbCase_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -176,7 +184,6 @@ namespace WGUCapstoneProject.AppViews
 
         private void cmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Organization organization = new Organization();
 
             if (cmbOrganization.SelectedItem == newOrganization)
             {
@@ -185,12 +192,12 @@ namespace WGUCapstoneProject.AppViews
             }
             else
             {
-                organization = (Organization)cmbOrganization.SelectedItem;
-                txtAddress1.Text = organization.AddressLine1;
-                txtAddress2.Text = organization.AddressLine2;
-                txtCity.Text = organization.City;
-                txtState.Text = organization.State;
-                txtZip.Text = organization.Zip;
+                Organization changedOrganization = (Organization)cmbOrganization.SelectedItem;
+                txtAddress1.Text = changedOrganization.AddressLine1;
+                txtAddress2.Text = changedOrganization.AddressLine2;
+                txtCity.Text = changedOrganization.City;
+                txtState.Text = changedOrganization.State;
+                txtZip.Text = changedOrganization.Zip;
             }
         }
 

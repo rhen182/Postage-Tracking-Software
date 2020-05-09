@@ -17,6 +17,7 @@ using WGUCapstoneProject.Models;
 using System.Data.SQLite;
 using System.Data;
 using WGUCapstoneProject.HelperClasses;
+using System.Linq;
 
 namespace WGUCapstoneProject.AppViews
 {
@@ -52,9 +53,6 @@ namespace WGUCapstoneProject.AppViews
                 RefreshPostageDataToGrid(postageDataGrid);
             }
         }
-
-
-
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
 
@@ -114,8 +112,13 @@ namespace WGUCapstoneProject.AppViews
         {
             Mail selectedMail = new Mail();
             selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
-
-            ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(selectedMail.MailId);
+            selectedMail = Mail.MailObservableCollection().ToList().Find(x => x.MailId == selectedMail.MailId);
+            Case selectedCase = Case.CaseObservableCollection().ToList().Find(x => x.CaseId == selectedMail.CaseId);
+            Organization selectedOrganization = Organization.OrganizationObservableCollection().ToList().Find(x => x.OrganizationId == selectedMail.OrganizationId);
+            PostageType selectedPostageType = PostageType.PostageTypeObservableCollection().ToList().Find(x => x.PostageTypeId == selectedMail.PostageTypeId);
+            ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(selectedMail, selectedCase, selectedOrganization, selectedPostageType);
+            Close();
+            modifyPostageWindow.Show();
         }
     }
 }

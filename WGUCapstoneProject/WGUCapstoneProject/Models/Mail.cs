@@ -15,7 +15,7 @@ namespace WGUCapstoneProject.Models
         public int OrganizationId { get; set; }
         public int RecipientId { get; set; }
 
-        public static ObservableCollection<Mail> CaseObservableCollection()
+        public static ObservableCollection<Mail> MailObservableCollection()
         {
             //Step 1 - define the observable collection
             ObservableCollection<Mail> mails = new ObservableCollection<Mail>();
@@ -65,7 +65,6 @@ namespace WGUCapstoneProject.Models
                 return mails;
             }
         }
-
         public static void InsertPostageToDb(DateTime dateSent, double cost, int caseId, int postageTypeId, int organizationId, int recipientId)
         {
             //Step 1 - The Connection String
@@ -88,6 +87,10 @@ namespace WGUCapstoneProject.Models
                 command.ExecuteNonQuery();
                 //Step 6 - Close the Connection
             }
+        }
+        public static void ModifyPostageToDb()
+        {
+            
         }
     }
 }

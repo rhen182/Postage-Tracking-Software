@@ -24,6 +24,8 @@ namespace WGUCapstoneProject.Models
             LastName = lastName;
         }
 
+
+
         public static ObservableCollection<Recipient> RecipientObservableCollection()
         {
             //Step 1 - define the observable collection
@@ -70,6 +72,22 @@ namespace WGUCapstoneProject.Models
 
                 //Step x = return the ObservableCollection
                 return recipients;
+            }
+        }
+
+        public static void UpdateRecipientToDb(string firstName, string lastName)
+        {
+            SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
+            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connStringBuilder.ToString();
+            using (conn)
+            {
+                SqliteCommand command = new SqliteCommand();
+                command.Connection = conn;
+                command.CommandText = @"UPDATE Recipient SET FirstName = " + firstName + ", SET LastName = " + lastName + "')";
+                conn.Open();
+                command.ExecuteNonQuery();
             }
         }
 

@@ -87,8 +87,8 @@
             Content="Cancel" Margin="3" Click="btnCancel_Click" KeyboardNavigation.TabIndex="12"
         ></Button>
         <Button
-            x:Name="btnAdd" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="7" Grid.RowSpan="2"
-            Content="Confirm" Margin="3" Click="btnAdd_Click" KeyboardNavigation.TabIndex="11"
+            x:Name="btnModify" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="7" Grid.RowSpan="2"
+            Content="Confirm" Margin="3" Click="btnModify_Click" KeyboardNavigation.TabIndex="11"
         ></Button>
     </Grid>
 </Window>

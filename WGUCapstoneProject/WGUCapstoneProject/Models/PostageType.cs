@@ -11,7 +11,6 @@ namespace WGUCapstoneProject.Models
     {
         public int PostageTypeId { get; set; }
         public string PostageTypeName { get; set; }
-
         public PostageType()
         {
 
@@ -70,27 +69,18 @@ namespace WGUCapstoneProject.Models
 
         public static void InsertPostageTypeToDb(string postageTypeName)
         {
-            //Step 1 - The Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
             connStringBuilder.DataSource = SQLiteHelper.dbDir;
-
-            //Step 2 - The Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
             using (conn)
             {
-                //Step 3 - The Command
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = conn;
-                command.CommandText = @"INSERT INTO PostageType (PostageTypeName) VALUES ('" + postageTypeName + "')";
-
-                //Step 4 - Open the Connection
+                command.CommandText = @"INSERT INTO PostageType (PostageTypeName) 
+                                        VALUES ('" + postageTypeName + "')";
                 conn.Open();
-
-                //Step 5 - Execute the Command
                 command.ExecuteNonQuery();
-
-                //Step 6 - Close the Connection
             }
         }
     }
