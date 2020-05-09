@@ -88,9 +88,32 @@ namespace WGUCapstoneProject.Models
                 //Step 6 - Close the Connection
             }
         }
-        public static void ModifyPostageToDb()
+        public static void UpdatePostageToDb(int currentMailId, double newCost, int newCaseId, int newPostageTypeId, int newOrganizationId, int newRecipientId)
         {
-            
+            SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder();
+            connectionStringBuilder.DataSource = SQLiteHelper.dbDir;
+            SqliteConnection conn = new SqliteConnection();
+            conn.ConnectionString = connectionStringBuilder.ToString();
+            using (conn)
+            {
+                SqliteCommand command = new SqliteCommand();
+
+                command.Connection = conn;
+                command.CommandText =
+                    @$"UPDATE
+	                    Mail
+                    SET
+	                    Cost = {newCost},
+	                    CaseId = {newCaseId},
+	                    PostageTypeId = {newPostageTypeId},
+	                    OrganizationId = {newOrganizationId},
+	                    RecipientId = {newRecipientId}
+                    WHERE
+	                    MailId = {currentMailId};";
+
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

@@ -27,7 +27,7 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="3">
-            <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="3" Grid.RowSpan="3" Grid.Row="1" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False" HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False" SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3">
+            <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="3" Grid.RowSpan="3" Grid.Row="1" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False" HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False" SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3" SelectionChanged="postageDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mail ID" Binding="{Binding MailId}"/>
                     <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>

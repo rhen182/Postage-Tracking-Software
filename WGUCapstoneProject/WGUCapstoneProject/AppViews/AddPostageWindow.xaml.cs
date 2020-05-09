@@ -155,11 +155,9 @@ namespace WGUCapstoneProject.AppViews
 
             Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
-            //!!!!!!!!!!!!!!!!!!!
-            //Temporarily disabled for easier testing
-            //ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-            //Close();
-            //viewPostageWindow.Show();
+            ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
+            Close();
+            viewPostageWindow.Show();
         }
 
         private void cmbCase_SelectionChanged(object sender, SelectionChangedEventArgs e)

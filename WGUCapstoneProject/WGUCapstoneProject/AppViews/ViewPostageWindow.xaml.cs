@@ -26,6 +26,10 @@ namespace WGUCapstoneProject.AppViews
     /// </summary>
     public partial class ViewPostageWindow : Window
     {
+        public int postageTypeIndex;
+        public int caseIndex;
+        public int organizationIndex;
+
 
         public ViewPostageWindow()
         {
@@ -116,9 +120,30 @@ namespace WGUCapstoneProject.AppViews
             Case selectedCase = Case.CaseObservableCollection().ToList().Find(x => x.CaseId == selectedMail.CaseId);
             Organization selectedOrganization = Organization.OrganizationObservableCollection().ToList().Find(x => x.OrganizationId == selectedMail.OrganizationId);
             PostageType selectedPostageType = PostageType.PostageTypeObservableCollection().ToList().Find(x => x.PostageTypeId == selectedMail.PostageTypeId);
-            ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(selectedMail, selectedCase, selectedOrganization, selectedPostageType);
+            Recipient selectedRecipient = Recipient.RecipientObservableCollection().ToList().Find(x => x.RecipientId == selectedMail.RecipientId);
+
+
+
+            caseIndex = Case.CaseObservableCollection().ToList().FindIndex(x => x.CaseId == selectedMail.CaseId);
+            postageTypeIndex = PostageType.PostageTypeObservableCollection().ToList().FindIndex(x => x.PostageTypeId == selectedMail.PostageTypeId);
+            organizationIndex = Organization.OrganizationObservableCollection().ToList().FindIndex(x => x.OrganizationId == selectedMail.OrganizationId);
+
+
+            ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(caseIndex, organizationIndex, postageTypeIndex, selectedMail, selectedCase, selectedOrganization, selectedPostageType, selectedRecipient);
             Close();
             modifyPostageWindow.Show();
+        }
+
+        private void postageDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //int mailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
+            //int caseName = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[1]);
+            //int lastNamee = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[2]);
+            //int orgg = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[3]);
+            //int costt = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[4]);
+            //int postatetype = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[5]);
+
+            //MessageBox.Show(mailId.ToString() + caseName.ToString() + lastNamee.ToString() + orgg.ToString() + costt.ToString() + postatetype.ToString());
         }
     }
 }

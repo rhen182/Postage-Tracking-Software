@@ -37,7 +37,7 @@ namespace WGUCapstoneProject.AppViews
         Recipient recipient = new Recipient();
         Organization organization = new Organization();
 
-        public ModifyPostageWindow(Mail mailToTransfer, Case selectedCase, Organization selectedOrganization, PostageType selectedPostageType)
+        public ModifyPostageWindow(int caseIndex, int orgIndex, int postageTypeIndex, Mail mailToTransfer, Case selectedCase, Organization selectedOrganization, PostageType selectedPostageType, Recipient selectedRecipient)
         {
             InitializeComponent();
 
@@ -47,29 +47,34 @@ namespace WGUCapstoneProject.AppViews
             organizations = Organization.OrganizationObservableCollection();
             mails = Mail.MailObservableCollection();
 
-            mail = mails.ToList().Find(x => x.MailId == mailToTransfer.MailId);
-            legalCase = caseList.ToList().Find(x => x.CaseId == mail.CaseId);
-            postageType = postageTypes.ToList().Find(x => x.PostageTypeId == mail.PostageTypeId);
-            recipient = recipients.ToList().Find(x => x.RecipientId == mail.RecipientId);
-            organization = organizations.ToList().Find(x => x.OrganizationId == mail.OrganizationId);
+            mail = mailToTransfer;
+            legalCase = selectedCase;
+            postageType = selectedPostageType;
+            recipient = selectedRecipient;
+            organization = selectedOrganization;
 
-            //FIGURE THIS PART OUT LATER. NEED TO MAKE IT SO THE COMBO BOXES AUTO FILL WITH THE SELECTED PROPERTIES TO BE MODIFED
-
-            cmbCase.SelectedItem = legalCase;
+            cmbCase.SelectedIndex = caseIndex;
+            cmbOrganization.SelectedIndex = orgIndex;
+            cmbPostageType.SelectedIndex = postageTypeIndex;
 
             //--------------------------------------------------------------------
 
+
             caseList = Case.CaseObservableCollection();
             caseList.Add(newCase);
-            caseList.Move(caseList.IndexOf(caseList[caseList.Count - 1]), caseList.IndexOf(caseList[0]));
+            //caseList.Move(caseList.IndexOf(caseList[caseList.Count]), caseList.IndexOf(caseList[0]));
 
             postageTypes = PostageType.PostageTypeObservableCollection();
             postageTypes.Add(newPostageType);
-            postageTypes.Move(postageTypes.IndexOf(postageTypes[postageTypes.Count - 1]), postageTypes.IndexOf(postageTypes[0]));
+            //postageTypes.Move(postageTypes.IndexOf(postageTypes[postageTypes.Count]), postageTypes.IndexOf(postageTypes[0]));
 
             organizations = Organization.OrganizationObservableCollection();
             organizations.Add(newOrganization);
-            organizations.Move(organizations.IndexOf(organizations[organizations.Count - 1]), organizations.IndexOf(organizations[0]));
+            //organizations.Move(organizations.IndexOf(organizations[organizations.Count]), organizations.IndexOf(organizations[0]));
+
+            txtNewRecipientFirstName.Text = recipient.FirstName;
+            txtNewRecipientLastName.Text = recipient.LastName;
+            txtCost.Text = mail.Cost.ToString();
 
             DataContext = this;
 
@@ -77,42 +82,37 @@ namespace WGUCapstoneProject.AppViews
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-            mail.DateSent = DateTime.Now;
             mail.Cost = Convert.ToDouble(txtCost.Text);
 
             if (String.IsNullOrEmpty(txtNewCaseName.Text))
             {
                 legalCase = (Case)cmbCase.SelectedItem;
                 mail.CaseId = legalCase.CaseId;
-                mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
-                //MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
             else
             {
                 legalCase.CaseName = txtNewCaseName.Text;
                 Case.InsertCaseToDb(legalCase.CaseName);
                 mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
-                //MessageBox.Show("CaseId = " + mail.CaseId.ToString());
+
             }
             if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
             {
                 postageType = (PostageType)cmbPostageType.SelectedItem;
                 mail.PostageTypeId = postageType.PostageTypeId;
-                mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
-                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             else
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
-                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
+
+
             }
             if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
-                mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
-                //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
+                mail.OrganizationId = organization.OrganizationId;
             }
             else
             {
@@ -124,6 +124,8 @@ namespace WGUCapstoneProject.AppViews
                 organization.Zip = txtZip.Text;
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
+
+
                 //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
 
@@ -138,10 +140,11 @@ namespace WGUCapstoneProject.AppViews
 
             mail.RecipientId = Recipient.RecipientObservableCollection().ToList().Max(x => x.RecipientId);
 
-            //Mail.UpdatePostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
+            Mail.UpdatePostageToDb(mail.MailId, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
             ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
             Close();
+            viewPostageWindow.Show();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -178,14 +181,25 @@ namespace WGUCapstoneProject.AppViews
             {
                 cmbOrganization.Visibility = Visibility.Collapsed;
                 txtNewOrganizationName.Visibility = Visibility.Visible;
+                txtAddress1.IsReadOnly = false;
+                txtAddress2.IsReadOnly = false;
+                txtCity.IsReadOnly = false;
+                txtState.IsReadOnly = false;
+                txtZip.IsReadOnly = false;
             }
             else
             {
-                txtAddress1.Text = organization.AddressLine1;
-                txtAddress2.Text = organization.AddressLine2;
-                txtCity.Text = organization.City;
-                txtState.Text = organization.State;
-                txtZip.Text = organization.Zip;
+                Organization changedOrganization = (Organization)cmbOrganization.SelectedItem;
+                txtAddress1.IsReadOnly = true;
+                txtAddress2.IsReadOnly = true;
+                txtCity.IsReadOnly = true;
+                txtState.IsReadOnly = true;
+                txtZip.IsReadOnly = true;
+                txtAddress1.Text = changedOrganization.AddressLine1;
+                txtAddress2.Text = changedOrganization.AddressLine2;
+                txtCity.Text = changedOrganization.City;
+                txtState.Text = changedOrganization.State;
+                txtZip.Text = changedOrganization.Zip;
             }
         }
 
