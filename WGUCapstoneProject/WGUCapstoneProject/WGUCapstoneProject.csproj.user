@@ -21,7 +21,7 @@
     <Compile Update="PlaygroundViews\DataBindingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="PopupWindows\AddCasePopUpWindow.xaml.cs">
+    <Compile Update="PlaygroundViews\PostageReport.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <Page Update="PlaygroundViews\DataBindingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="PopupWindows\AddCasePopUpWindow.xaml">
+    <Page Update="PlaygroundViews\PostageReport.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

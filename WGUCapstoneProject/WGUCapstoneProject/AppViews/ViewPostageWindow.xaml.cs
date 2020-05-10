@@ -18,6 +18,7 @@ using System.Data.SQLite;
 using System.Data;
 using WGUCapstoneProject.HelperClasses;
 using System.Linq;
+using WGUCapstoneProject.PlaygroundViews;
 
 namespace WGUCapstoneProject.AppViews
 {
@@ -34,6 +35,7 @@ namespace WGUCapstoneProject.AppViews
         public ViewPostageWindow()
         {
             InitializeComponent();
+
             RefreshPostageDataToGrid(postageDataGrid);
         }
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
@@ -122,8 +124,6 @@ namespace WGUCapstoneProject.AppViews
             PostageType selectedPostageType = PostageType.PostageTypeObservableCollection().ToList().Find(x => x.PostageTypeId == selectedMail.PostageTypeId);
             Recipient selectedRecipient = Recipient.RecipientObservableCollection().ToList().Find(x => x.RecipientId == selectedMail.RecipientId);
 
-
-
             caseIndex = Case.CaseObservableCollection().ToList().FindIndex(x => x.CaseId == selectedMail.CaseId);
             postageTypeIndex = PostageType.PostageTypeObservableCollection().ToList().FindIndex(x => x.PostageTypeId == selectedMail.PostageTypeId);
             organizationIndex = Organization.OrganizationObservableCollection().ToList().FindIndex(x => x.OrganizationId == selectedMail.OrganizationId);
@@ -144,6 +144,13 @@ namespace WGUCapstoneProject.AppViews
             //int postatetype = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[5]);
 
             //MessageBox.Show(mailId.ToString() + caseName.ToString() + lastNamee.ToString() + orgg.ToString() + costt.ToString() + postatetype.ToString());
+        }
+
+        private void btnGetReport_Click_1(object sender, RoutedEventArgs e)
+        {
+            PostageReport postageReport = new PostageReport();
+            Close();
+            postageReport.Show();
         }
     }
 }

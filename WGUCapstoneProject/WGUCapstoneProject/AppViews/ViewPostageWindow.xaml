@@ -55,6 +55,9 @@
                 Margin="3"
                 Click="btnModify_Click"
             ></Button>
+            <Button
+                Grid.Column="1" Grid.Row="5" Content="Get Report" Margin="3" Click="btnGetReport_Click_1" x:Name="btnGetReport"
+            ></Button>
             <!--Row 2-->
             <Button
                 Grid.Column="2" Grid.Row="2"

@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WGUCapstoneProject.HelperClasses;
 using WGUCapstoneProject.Models;
-using WGUCapstoneProject.PopupWindows;
 
 namespace WGUCapstoneProject.AppViews
 {
@@ -88,6 +87,7 @@ namespace WGUCapstoneProject.AppViews
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             mail.DateSent = DateTime.Now;
+
             mail.Cost = Convert.ToDouble(txtCost.Text);
 
             if (String.IsNullOrEmpty(txtNewCaseName.Text))
@@ -182,7 +182,6 @@ namespace WGUCapstoneProject.AppViews
 
         private void cmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             if (cmbOrganization.SelectedItem == newOrganization)
             {
                 cmbOrganization.Visibility = Visibility.Collapsed;
