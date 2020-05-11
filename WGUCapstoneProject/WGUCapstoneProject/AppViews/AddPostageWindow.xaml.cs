@@ -36,10 +36,14 @@ namespace WGUCapstoneProject.AppViews
         PostageType postageType = new PostageType();
         Recipient recipient = new Recipient();
         Organization organization = new Organization();
-        
+
+        int counter = 0;
+
         public AddPostageWindow()
         {
             InitializeComponent();
+
+            
 
             if (Case.CaseObservableCollection() == null)
             {
@@ -86,48 +90,59 @@ namespace WGUCapstoneProject.AppViews
         }
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            mail.DateSent = DateTime.Now;
-
-            mail.Cost = Convert.ToDouble(txtCost.Text);
-
-            if (String.IsNullOrEmpty(txtNewCaseName.Text))
+            if (cmbCase.SelectedItem != null && cmbCase.Visibility == Visibility.Visible && counter == 0)
             {
                 legalCase = (Case)cmbCase.SelectedItem;
                 mail.CaseId = legalCase.CaseId;
                 mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
+                counter++;
                 //MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
-            else
+            else if (!String.IsNullOrWhiteSpace(txtNewCaseName.Text) && txtNewCaseName.Visibility == Visibility.Visible && counter == 0)
             {
                 legalCase.CaseName = txtNewCaseName.Text;
                 Case.InsertCaseToDb(legalCase.CaseName);
                 mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
+                counter++;
                 //MessageBox.Show("CaseId = " + mail.CaseId.ToString());
             }
-            if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
+            else
+            {
+                counter = 0;
+            }
+
+            if (cmbPostageType.SelectedItem != null && cmbPostageType.Visibility == Visibility.Visible && counter == 1)
             {
                 postageType = (PostageType)cmbPostageType.SelectedItem;
                 mail.PostageTypeId = postageType.PostageTypeId;
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
+                counter++;
+                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
+            }
+            else if (!String.IsNullOrWhiteSpace(txtNewCaseName.Text) && txtNewCaseName.Visibility == Visibility.Visible)
+            {
+                postageType.PostageTypeName = txtNewPostageTypeName.Text;
+                PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
+                mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
+                counter++;
                 //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             else
             {
-                postageType.PostageTypeName = txtNewPostageTypeName.Text;
-
-                PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
-
-                mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
-                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
+                counter = 0;
             }
-            if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
+
+
+
+            if (cmbOrganization.SelectedItem != null && cmbOrganization.Visibility == Visibility.Visible && counter == 2)
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
                 mail.OrganizationId = postageType.PostageTypeId;
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
+                counter++;
                 //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
-            else
+            else if(!String.IsNullOrWhiteSpace(txtNewOrganizationName.Text) && txtNewOrganizationName.Visibility == Visibility.Visible && counter == 2)
             {
                 organization.OrganizationName = txtNewOrganizationName.Text;
                 organization.AddressLine1 = txtAddress1.Text;
@@ -139,25 +154,59 @@ namespace WGUCapstoneProject.AppViews
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
 
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
+                counter++;
                 //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
+            else
+            {
+                counter = 0;
+            }
 
-            recipient.FirstName = txtNewRecipientFirstName.Text;
-            recipient.LastName = txtNewRecipientLastName.Text;
-            //MessageBox.Show("RecipientId = " + mail.RecipientId.ToString());
+            double invalid = 0;
+            bool validDouble = double.TryParse(txtCost.Text, out invalid);
 
 
-            Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
+            if (!String.IsNullOrWhiteSpace(txtCost.Text) && counter == 3 && validDouble == true)
+            {
+                mail.Cost = Convert.ToDouble(txtCost.Text);
+                counter++;
+            }
+            else
+            {
+                counter = 0;
+            }
 
-            List<Recipient> recs = new List<Recipient>();
+            if (!String.IsNullOrWhiteSpace(txtNewRecipientFirstName.Text) && !String.IsNullOrWhiteSpace(txtNewRecipientLastName.Text) && counter == 4)
+            {
+                recipient.FirstName = txtNewRecipientFirstName.Text;
+                recipient.LastName = txtNewRecipientLastName.Text;
+                counter++;
+            }
+            else
+            {
+                counter = 0;
+            }
 
-            mail.RecipientId = Recipient.RecipientObservableCollection().ToList().Max(x => x.RecipientId);
+            if (counter == 5)
+            {
+                mail.DateSent = DateTime.Now;
+                Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
 
-            Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
+                List<Recipient> recs = new List<Recipient>();
 
-            ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-            Close();
-            viewPostageWindow.Show();
+                mail.RecipientId = Recipient.RecipientObservableCollection().ToList().Max(x => x.RecipientId);
+
+                Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
+
+                ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
+                Close();
+                viewPostageWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Missing information for postage entry");
+                counter = 0;
+            }
         }
 
         private void cmbCase_SelectionChanged(object sender, SelectionChangedEventArgs e)

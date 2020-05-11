@@ -27,7 +27,10 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="3">
-            <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="3" Grid.RowSpan="3" Grid.Row="1" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False" HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False" SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3" SelectionChanged="postageDataGrid_SelectionChanged">
+            <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="3" Grid.RowSpan="3"
+                      Grid.Row="1" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False"
+                      HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
+                      SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mail ID" Binding="{Binding MailId}"/>
                     <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>
@@ -56,13 +59,13 @@
                 Click="btnModify_Click"
             ></Button>
             <Button
-                Grid.Column="1" Grid.Row="5" Content="Get Report" Margin="3" Click="btnGetReport_Click_1" x:Name="btnGetReport"
+                Grid.Column="1" Grid.Row="5" Content="Postage Report" Margin="3" Click="btnGetReport_Click_1" x:Name="btnGetReport"
             ></Button>
             <!--Row 2-->
             <Button
                 Grid.Column="2" Grid.Row="2"
                 x:Name="btnDeleteOne"
-                Content="Delete One"
+                Content="Delete Postage"
                 Click="BtnDeleteOne_Click"
                 Margin="3"
             ></Button>
@@ -72,6 +75,7 @@
                 Content="Delete All"
                 Click="BtnDelete_Click"
                 Margin="3"
+                Visibility="Visible"
             ></Button>
             <!--Row 3-->
             <Button
@@ -80,6 +84,7 @@
                 Content="Refresh"
                 Click="BtnRefresh_Click"
                 Margin="3"
+                Visibility="Collapsed"
             ></Button>
         </StackPanel>
 

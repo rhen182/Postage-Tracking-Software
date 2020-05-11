@@ -61,30 +61,30 @@ namespace WGUCapstoneProject.AppViews
         }
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
-
-            //Select Values From Datagrid
-            Mail selectedMail = new Mail();
-
-            selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
-
-            //MessageBox.Show(selectedMail.MailId.ToString());
-
-            //Delete Single Mail from DB
-
-            SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
-            SQLiteConnection conn = new SQLiteConnection();
-            conn.ConnectionString = connStringBuilder.ToString();
-            using (conn)
+            if (postageDataGrid.SelectedItem != null)
             {
-                SQLiteCommand command = new SQLiteCommand();
-                command.Connection = conn;
-                command.CommandText = @"DELETE FROM Mail WHERE MailId = " + selectedMail.MailId + ";";
-                conn.Open();
-                command.ExecuteNonQuery();
-                RefreshPostageDataToGrid(postageDataGrid);
+                Mail selectedMail = new Mail();
+                selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
+                SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
+                connStringBuilder.DataSource = SQLiteHelper.dbDir;
+                SQLiteConnection conn = new SQLiteConnection();
+                conn.ConnectionString = connStringBuilder.ToString();
+                using (conn)
+                {
+                    SQLiteCommand command = new SQLiteCommand();
+                    command.Connection = conn;
+                    command.CommandText = @"DELETE FROM Mail WHERE MailId = " + selectedMail.MailId + ";";
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    RefreshPostageDataToGrid(postageDataGrid);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a postage entry to delete.");
             }
         }
+
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -116,34 +116,29 @@ namespace WGUCapstoneProject.AppViews
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-            Mail selectedMail = new Mail();
-            selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
-            selectedMail = Mail.MailObservableCollection().ToList().Find(x => x.MailId == selectedMail.MailId);
-            Case selectedCase = Case.CaseObservableCollection().ToList().Find(x => x.CaseId == selectedMail.CaseId);
-            Organization selectedOrganization = Organization.OrganizationObservableCollection().ToList().Find(x => x.OrganizationId == selectedMail.OrganizationId);
-            PostageType selectedPostageType = PostageType.PostageTypeObservableCollection().ToList().Find(x => x.PostageTypeId == selectedMail.PostageTypeId);
-            Recipient selectedRecipient = Recipient.RecipientObservableCollection().ToList().Find(x => x.RecipientId == selectedMail.RecipientId);
+            if (postageDataGrid.SelectedItem != null)
+            {
+                Mail selectedMail = new Mail();
+                selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
+                selectedMail = Mail.MailObservableCollection().ToList().Find(x => x.MailId == selectedMail.MailId);
+                Case selectedCase = Case.CaseObservableCollection().ToList().Find(x => x.CaseId == selectedMail.CaseId);
+                Organization selectedOrganization = Organization.OrganizationObservableCollection().ToList().Find(x => x.OrganizationId == selectedMail.OrganizationId);
+                PostageType selectedPostageType = PostageType.PostageTypeObservableCollection().ToList().Find(x => x.PostageTypeId == selectedMail.PostageTypeId);
+                Recipient selectedRecipient = Recipient.RecipientObservableCollection().ToList().Find(x => x.RecipientId == selectedMail.RecipientId);
 
-            caseIndex = Case.CaseObservableCollection().ToList().FindIndex(x => x.CaseId == selectedMail.CaseId);
-            postageTypeIndex = PostageType.PostageTypeObservableCollection().ToList().FindIndex(x => x.PostageTypeId == selectedMail.PostageTypeId);
-            organizationIndex = Organization.OrganizationObservableCollection().ToList().FindIndex(x => x.OrganizationId == selectedMail.OrganizationId);
+                caseIndex = Case.CaseObservableCollection().ToList().FindIndex(x => x.CaseId == selectedMail.CaseId);
+                postageTypeIndex = PostageType.PostageTypeObservableCollection().ToList().FindIndex(x => x.PostageTypeId == selectedMail.PostageTypeId);
+                organizationIndex = Organization.OrganizationObservableCollection().ToList().FindIndex(x => x.OrganizationId == selectedMail.OrganizationId);
 
+                ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(caseIndex, organizationIndex, postageTypeIndex, selectedMail, selectedCase, selectedOrganization, selectedPostageType, selectedRecipient);
+                Close();
+                modifyPostageWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a postage entry.");
+            }
 
-            ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(caseIndex, organizationIndex, postageTypeIndex, selectedMail, selectedCase, selectedOrganization, selectedPostageType, selectedRecipient);
-            Close();
-            modifyPostageWindow.Show();
-        }
-
-        private void postageDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //int mailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
-            //int caseName = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[1]);
-            //int lastNamee = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[2]);
-            //int orgg = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[3]);
-            //int costt = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[4]);
-            //int postatetype = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[5]);
-
-            //MessageBox.Show(mailId.ToString() + caseName.ToString() + lastNamee.ToString() + orgg.ToString() + costt.ToString() + postatetype.ToString());
         }
 
         private void btnGetReport_Click_1(object sender, RoutedEventArgs e)

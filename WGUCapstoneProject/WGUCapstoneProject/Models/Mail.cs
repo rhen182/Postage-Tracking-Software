@@ -28,43 +28,40 @@ namespace WGUCapstoneProject.Models
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
-            using (conn)
-            {
                 //Step 3 - Command
-                SqliteCommand command = new SqliteCommand();
-                command.CommandText = "SELECT * FROM Mail";
-                command.Connection = conn;
+            SqliteCommand command = new SqliteCommand();
+            command.CommandText = "SELECT * FROM Mail";
+            command.Connection = conn;
 
-                //Step 4 - Open connection
-                conn.Open();
+            //Step 4 - Open connection
+            conn.Open();
 
-                //Step 5 - Execute Command
-                SqliteDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+            //Step 5 - Execute Command
+            SqliteDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        Mail mail = new Mail();
-                        mail.MailId = reader.GetInt32(0);
-                        mail.DateSent = reader.GetDateTime(1);
-                        mail.CaseId = reader.GetInt32(2);
-                        mail.Cost = reader.GetDouble(3);
-                        mail.PostageTypeId = reader.GetInt32(4);
-                        mail.OrganizationId = reader.GetInt32(5);
-                        mail.RecipientId = reader.GetInt32(6);
-                        mails.Add(mail);
-                    }
+                    Mail mail = new Mail();
+                    mail.MailId = reader.GetInt32(0);
+                    mail.DateSent = reader.GetDateTime(1);
+                    mail.CaseId = reader.GetInt32(2);
+                    mail.Cost = reader.GetDouble(3);
+                    mail.PostageTypeId = reader.GetInt32(4);
+                    mail.OrganizationId = reader.GetInt32(5);
+                    mail.RecipientId = reader.GetInt32(6);
+                    mails.Add(mail);
                 }
-                else
-                {
-                    return null;
-                }
-
-                //Step x = Close Connection
-
-                //Step x = return the ObservableCollection
-                return mails;
             }
+            else
+            {
+                return null;
+            }
+
+            //Step x = Close Connection
+            conn.Close();
+            //Step x = return the ObservableCollection
+            return mails;
         }
         public static ObservableCollection<Mail> MailByCaseAndMonthReport(DateTime selectedMonth, Case selectedCase)
         {
