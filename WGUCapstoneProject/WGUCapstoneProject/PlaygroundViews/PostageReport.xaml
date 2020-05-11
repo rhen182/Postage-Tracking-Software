@@ -45,7 +45,10 @@
         <Button
             x:Name="btnExportToCsv" Grid.Column="5" Grid.Row="1" Content="Export to CSV" Margin="3" Click="btnExportToCsv_Click"
         ></Button>
-        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.RowSpan="4" Grid.Row="2" Grid.ColumnSpan="3" AreRowDetailsFrozen="True" CanUserAddRows="False" HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False" SelectionMode="Extended" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3">
+        <Button
+            x:Name="btnCancel" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Margin="3" Click="btnCancel_Click"
+        ></Button>
+        <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" AreRowDetailsFrozen="True" CanUserAddRows="False" HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False" SelectionMode="Extended" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Mail ID" Binding="{Binding MailId}"/>
                 <DataGridTextColumn Header="Case" Binding="{Binding CaseName}"/>

@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WGUCapstoneProject.AppViews;
 using WGUCapstoneProject.HelperClasses;
 using WGUCapstoneProject.Models;
 
@@ -121,12 +122,20 @@ namespace WGUCapstoneProject.PlaygroundViews
                     IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
                     sb.AppendLine(string.Join(",", fields));
                 }
-                File.WriteAllText("test.csv", sb.ToString());
+                File.WriteAllText(SQLiteHelper.reportDir, sb.ToString());
+                MessageBox.Show("A report has been generated.");
             }
             else
             {
                 MessageBox.Show("A report has not been generated.");
             }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            ViewPostageWindow view = new ViewPostageWindow();
+            Close();
+            view.Show();
         }
     }
 }

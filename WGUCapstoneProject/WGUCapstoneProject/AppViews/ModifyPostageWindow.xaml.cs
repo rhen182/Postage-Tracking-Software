@@ -37,6 +37,8 @@ namespace WGUCapstoneProject.AppViews
         Recipient recipient = new Recipient();
         Organization organization = new Organization();
 
+        int counter = 0;
+
         public ModifyPostageWindow(int caseIndex, int orgIndex, int postageTypeIndex, Mail mailToTransfer, Case selectedCase, Organization selectedOrganization, PostageType selectedPostageType, Recipient selectedRecipient)
         {
             InitializeComponent();
@@ -82,39 +84,50 @@ namespace WGUCapstoneProject.AppViews
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-            mail.Cost = Convert.ToDouble(txtCost.Text);
 
-            if (String.IsNullOrEmpty(txtNewCaseName.Text))
+            if (cmbCase.SelectedItem != null && cmbCase.Visibility == Visibility.Visible && counter == 0)
             {
                 legalCase = (Case)cmbCase.SelectedItem;
                 mail.CaseId = legalCase.CaseId;
+                counter++;
             }
-            else
+            else if (!String.IsNullOrWhiteSpace(txtNewCaseName.Text) && txtNewCaseName.Visibility == Visibility.Visible && counter == 0)
             {
                 legalCase.CaseName = txtNewCaseName.Text;
                 Case.InsertCaseToDb(legalCase.CaseName);
                 mail.CaseId = Case.CaseObservableCollection().ToList().Max(x => x.CaseId);
-
+                counter++;
             }
-            if (String.IsNullOrEmpty(txtNewPostageTypeName.Text))
+            else
+            {
+                counter = 0;
+            }
+
+            if (cmbPostageType.SelectedItem != null && cmbPostageType.Visibility == Visibility.Visible && counter == 1)
             {
                 postageType = (PostageType)cmbPostageType.SelectedItem;
                 mail.PostageTypeId = postageType.PostageTypeId;
+                counter++;
             }
-            else
+            else if (!String.IsNullOrWhiteSpace(txtNewPostageTypeName.Text) && txtNewPostageTypeName.Visibility == Visibility.Visible && counter == 1)
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
-
-
+                counter++;
             }
-            if (String.IsNullOrEmpty(txtNewOrganizationName.Text))
+            else
+            {
+                counter = 0;
+            }
+
+            if (cmbOrganization.SelectedItem != null && cmbOrganization.Visibility == Visibility.Visible && counter == 2)
             {
                 organization = (Organization)cmbOrganization.SelectedItem;
                 mail.OrganizationId = organization.OrganizationId;
+                counter++;
             }
-            else
+            else if (!String.IsNullOrWhiteSpace(txtNewOrganizationName.Text) && txtNewOrganizationName.Visibility == Visibility.Visible && counter == 2)
             {
                 organization.OrganizationName = txtNewOrganizationName.Text;
                 organization.AddressLine1 = txtAddress1.Text;
@@ -124,27 +137,57 @@ namespace WGUCapstoneProject.AppViews
                 organization.Zip = txtZip.Text;
                 Organization.InsertOrganizationToDb(organization.OrganizationName, organization.AddressLine1, organization.AddressLine2, organization.City, organization.State, organization.Zip);
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
-
-
+                counter++;
                 //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
+            else
+            {
+                counter = 0;
+            }
 
-            recipient.FirstName = txtNewRecipientFirstName.Text;
-            recipient.LastName = txtNewRecipientLastName.Text;
-            //MessageBox.Show("RecipientId = " + mail.RecipientId.ToString());
+            double invalid = 0;
+            bool validDouble = double.TryParse(txtCost.Text, out invalid);
+            if (!String.IsNullOrWhiteSpace(txtCost.Text) && counter == 3 && validDouble == true)
+            {
+                mail.Cost = Convert.ToDouble(txtCost.Text);
+                counter++;
+            }
+            else
+            {
+                counter = 0;
+            }
 
+            if (!String.IsNullOrWhiteSpace(txtNewRecipientFirstName.Text) && !String.IsNullOrWhiteSpace(txtNewRecipientLastName.Text) && counter == 4)
+            {
+                recipient.FirstName = txtNewRecipientFirstName.Text;
+                recipient.LastName = txtNewRecipientLastName.Text;
+                counter++;
+            }
+            else
+            {
+                counter = 0;
+            }
 
-            Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
+            if (counter == 5)
+            {
+                Recipient.InsertRecipientToDb(recipient.FirstName, recipient.LastName);
 
-            List<Recipient> recs = new List<Recipient>();
+                List<Recipient> recs = new List<Recipient>();
 
-            mail.RecipientId = Recipient.RecipientObservableCollection().ToList().Max(x => x.RecipientId);
+                mail.RecipientId = Recipient.RecipientObservableCollection().ToList().Max(x => x.RecipientId);
 
-            Mail.UpdatePostageToDb(mail.MailId, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
+                Mail.UpdatePostageToDb(mail.MailId, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
-            ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-            Close();
-            viewPostageWindow.Show();
+                ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
+                Close();
+                viewPostageWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Missing information for postage entry update");
+                counter = 0;
+            }
+
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

@@ -45,8 +45,9 @@ namespace WGUCapstoneProject.Models
                     Mail mail = new Mail();
                     mail.MailId = reader.GetInt32(0);
                     mail.DateSent = reader.GetDateTime(1);
-                    mail.CaseId = reader.GetInt32(2);
-                    mail.Cost = reader.GetDouble(3);
+                    mail.Cost = reader.GetDouble(2);
+                    mail.CaseId = reader.GetInt32(3);
+                    
                     mail.PostageTypeId = reader.GetInt32(4);
                     mail.OrganizationId = reader.GetInt32(5);
                     mail.RecipientId = reader.GetInt32(6);

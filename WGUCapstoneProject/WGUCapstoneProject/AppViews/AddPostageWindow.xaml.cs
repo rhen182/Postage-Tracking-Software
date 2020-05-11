@@ -43,8 +43,6 @@ namespace WGUCapstoneProject.AppViews
         {
             InitializeComponent();
 
-            
-
             if (Case.CaseObservableCollection() == null)
             {
                 cmbCase.Visibility = Visibility.Collapsed;
@@ -117,22 +115,18 @@ namespace WGUCapstoneProject.AppViews
                 mail.PostageTypeId = postageType.PostageTypeId;
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
                 counter++;
-                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
-            else if (!String.IsNullOrWhiteSpace(txtNewCaseName.Text) && txtNewCaseName.Visibility == Visibility.Visible)
+            else if (!String.IsNullOrWhiteSpace(txtNewPostageTypeName.Text) && txtNewPostageTypeName.Visibility == Visibility.Visible && counter == 1)
             {
                 postageType.PostageTypeName = txtNewPostageTypeName.Text;
                 PostageType.InsertPostageTypeToDb(postageType.PostageTypeName);
                 mail.PostageTypeId = PostageType.PostageTypeObservableCollection().ToList().Max(x => x.PostageTypeId);
                 counter++;
-                //MessageBox.Show("PostageTypeId = " + mail.PostageTypeId.ToString());
             }
             else
             {
                 counter = 0;
             }
-
-
 
             if (cmbOrganization.SelectedItem != null && cmbOrganization.Visibility == Visibility.Visible && counter == 2)
             {
@@ -164,8 +158,6 @@ namespace WGUCapstoneProject.AppViews
 
             double invalid = 0;
             bool validDouble = double.TryParse(txtCost.Text, out invalid);
-
-
             if (!String.IsNullOrWhiteSpace(txtCost.Text) && counter == 3 && validDouble == true)
             {
                 mail.Cost = Convert.ToDouble(txtCost.Text);
@@ -204,7 +196,6 @@ namespace WGUCapstoneProject.AppViews
             }
             else
             {
-                MessageBox.Show("Missing information for postage entry");
                 counter = 0;
             }
         }

@@ -130,7 +130,8 @@ namespace WGUCapstoneProject.AppViews
                 postageTypeIndex = PostageType.PostageTypeObservableCollection().ToList().FindIndex(x => x.PostageTypeId == selectedMail.PostageTypeId);
                 organizationIndex = Organization.OrganizationObservableCollection().ToList().FindIndex(x => x.OrganizationId == selectedMail.OrganizationId);
 
-                ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow(caseIndex, organizationIndex, postageTypeIndex, selectedMail, selectedCase, selectedOrganization, selectedPostageType, selectedRecipient);
+                ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow
+                    (caseIndex, organizationIndex, postageTypeIndex, selectedMail, selectedCase, selectedOrganization, selectedPostageType, selectedRecipient);
                 Close();
                 modifyPostageWindow.Show();
             }
