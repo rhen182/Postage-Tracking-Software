@@ -18,9 +18,6 @@
     <Compile Update="AppViews\ViewPostageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="PlaygroundViews\DataBindingWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="PlaygroundViews\PostageReport.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,12 +30,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="AppViews\ViewPostageWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="PlaygroundViews\DataBindingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="PlaygroundViews\PostageReport.xaml">

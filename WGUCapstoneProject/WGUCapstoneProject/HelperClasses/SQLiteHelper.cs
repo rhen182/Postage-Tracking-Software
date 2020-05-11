@@ -18,12 +18,6 @@ namespace WGUCapstoneProject.HelperClasses
                 .ToString()).ToString()).ToString()
                 + "/PostageDB.db";
 
-        static public string reportDir = Directory.GetParent
-                (Directory.GetParent
-                (Directory.GetParent
-                (Environment.CurrentDirectory)
-                .ToString()).ToString()).ToString() + "/Report.csv";
-
         static public SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.dbDir + ";");
 
 

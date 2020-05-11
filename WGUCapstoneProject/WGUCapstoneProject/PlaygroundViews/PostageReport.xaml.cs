@@ -9,12 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WGUCapstoneProject.AppViews;
 using WGUCapstoneProject.HelperClasses;
 using WGUCapstoneProject.Models;
@@ -63,13 +57,7 @@ namespace WGUCapstoneProject.PlaygroundViews
             cmbYears.ItemsSource = years;
             cmbCase.ItemsSource = cases;
             DataContext = this;
-
-
-
         }
-
-
-
 
         public void RefreshPostageDataToGrid(DataGrid dataGrid, string selectedMonth, int selectedYear, string caseName)
         {
@@ -122,7 +110,7 @@ namespace WGUCapstoneProject.PlaygroundViews
                     IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
                     sb.AppendLine(string.Join(",", fields));
                 }
-                File.WriteAllText(SQLiteHelper.reportDir, sb.ToString());
+                File.WriteAllText($"{txtCsvName.Text}.csv", sb.ToString());
                 MessageBox.Show("A report has been generated.");
             }
             else

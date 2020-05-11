@@ -31,7 +31,6 @@ namespace WGUCapstoneProject.AppViews
         public int caseIndex;
         public int organizationIndex;
 
-
         public ViewPostageWindow()
         {
             InitializeComponent();
@@ -84,7 +83,6 @@ namespace WGUCapstoneProject.AppViews
                 MessageBox.Show("Please select a postage entry to delete.");
             }
         }
-
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
