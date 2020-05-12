@@ -27,47 +27,7 @@ namespace WGUCapstoneProject.AppViews
         private void LoginClick(object sender, RoutedEventArgs e)
         {
             Employee user = new Employee();
-
-            List<Employee> employees = Employee.EmployeeObservableCollection().ToList();
-
-            user.Username = txtUsername.Text;
-            user.Password = txtPassword.Password;
-            bool passwordCorrect = false;
-            bool usernameCorrect = false;
-
-            foreach (Employee employee in employees)
-            {
-                if (employee.Username == user.Username)
-                {
-                    usernameCorrect = true;
-                    if (usernameCorrect == true && employee.Password == user.Password)
-                    {
-                        passwordCorrect = true;
-                        break;
-                    }
-                    else
-                    {
-                        usernameCorrect = false;
-                        passwordCorrect = false;
-                    }
-                }
-                else
-                {
-                    usernameCorrect = false;
-                    passwordCorrect = false;
-                }
-            }
-            if (usernameCorrect == true && passwordCorrect == true)
-            {
-                MessageBox.Show("Logged in");
-                ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-                Close();
-                viewPostageWindow.Show();
-            }
-            else
-            {
-                MessageBox.Show("Incorrect Login");
-            }
+            user.Login(user.CanLogin(txtUsername.Text, txtPassword.Password), this);
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)

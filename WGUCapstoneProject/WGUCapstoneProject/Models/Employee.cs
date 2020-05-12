@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Windows;
+using WGUCapstoneProject.AppViews;
 using WGUCapstoneProject.HelperClasses;
 
 namespace WGUCapstoneProject.Models
@@ -13,6 +16,15 @@ namespace WGUCapstoneProject.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string JobPosition { get; set; }
+        public Employee()
+        {
+
+        }
+        public Employee(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
 
         public static ObservableCollection<Employee> EmployeeObservableCollection()
         {
@@ -64,9 +76,112 @@ namespace WGUCapstoneProject.Models
             }
         }
 
-        public void Login()
+        public static List<Employee> GetEmployees()
         {
-            throw new NotImplementedException();
+            List<Employee> employees = new List<Employee>();
+            employees.Add(new Employee("test1", "test2"));
+            employees.Add(new Employee("username", "password"));
+            return employees;
+        }
+
+        public bool CanLoginList(string username, string password)
+        {
+            Employee user = new Employee();
+            user.Username = username; //txtUsername.Text;
+            user.Password = password; //txtPassword.Password;
+            bool passwordCorrect = false;
+            bool usernameCorrect = false;
+
+            foreach (Employee employee in GetEmployees())
+            {
+                if (employee.Username == user.Username)
+                {
+                    usernameCorrect = true;
+                    if (usernameCorrect == true && employee.Password == user.Password)
+                    {
+                        passwordCorrect = true;
+                        break;
+                    }
+                    else
+                    {
+                        usernameCorrect = false;
+                        passwordCorrect = false;
+                    }
+                }
+                else
+                {
+                    usernameCorrect = false;
+                    passwordCorrect = false;
+                }
+            }
+            if (usernameCorrect == true && passwordCorrect == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+        public bool CanLogin(string username, string password)
+        {
+            Employee user = new Employee();
+
+            List<Employee> employees = Employee.EmployeeObservableCollection().ToList();
+
+            user.Username = username; //txtUsername.Text;
+            user.Password = password; //txtPassword.Password;
+            bool passwordCorrect = false;
+            bool usernameCorrect = false;
+
+            foreach (Employee employee in employees)
+            {
+                if (employee.Username == user.Username)
+                {
+                    usernameCorrect = true;
+                    if (usernameCorrect == true && employee.Password == user.Password)
+                    {
+                        passwordCorrect = true;
+                        break;
+                    }
+                    else
+                    {
+                        usernameCorrect = false;
+                        passwordCorrect = false;
+                    }
+                }
+                else
+                {
+                    usernameCorrect = false;
+                    passwordCorrect = false;
+                }
+            }
+            if (usernameCorrect == true && passwordCorrect == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void Login(bool canLogin, LoginWindow loginWindow)
+        {
+            if (canLogin)
+            {
+                MessageBox.Show("Logged in");
+                ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
+                loginWindow.Close(); //this.Close();
+                viewPostageWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Login");
+            }
         }
     }
 }

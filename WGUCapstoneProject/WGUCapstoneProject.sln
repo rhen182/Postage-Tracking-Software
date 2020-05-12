@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WGUCapstoneProject", "WGUCapstoneProject\WGUCapstoneProject.csproj", "{FD1D98B0-A47B-4FAF-A3EF-E3B685736E86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WGUCapstoneProject", "WGUCapstoneProject\WGUCapstoneProject.csproj", "{FD1D98B0-A47B-4FAF-A3EF-E3B685736E86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WGUCapstone.UnitTest", "WGUCapstone.UnitTest\WGUCapstone.UnitTest.csproj", "{F7C5B45A-843D-4AAD-9C9E-E24F7BE396FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FD1D98B0-A47B-4FAF-A3EF-E3B685736E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD1D98B0-A47B-4FAF-A3EF-E3B685736E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD1D98B0-A47B-4FAF-A3EF-E3B685736E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7C5B45A-843D-4AAD-9C9E-E24F7BE396FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C5B45A-843D-4AAD-9C9E-E24F7BE396FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C5B45A-843D-4AAD-9C9E-E24F7BE396FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C5B45A-843D-4AAD-9C9E-E24F7BE396FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
