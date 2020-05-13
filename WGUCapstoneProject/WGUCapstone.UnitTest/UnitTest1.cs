@@ -1,8 +1,4 @@
-using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using WGUCapstoneProject.AppViews;
-using WGUCapstoneProject.HelperClasses;
 using WGUCapstoneProject.Models;
 using Xunit;
 

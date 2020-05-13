@@ -36,7 +36,7 @@ namespace WGUCapstoneProject.PlaygroundViews
             months = new ObservableCollection<string>();
             foreach (Mail mail in mails)
             {
-                if(!months.Contains(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Day)))
+                if (!months.Contains(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Day)))
                 {
                     months.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Day));
                 }
@@ -81,18 +81,27 @@ namespace WGUCapstoneProject.PlaygroundViews
             {
                 MessageBox.Show(ex.Message);
             }
+
+
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
-            Case selectedCase = (Case)cmbCase.SelectedItem;
+            if (cmbCase.SelectedItem != null && cmbMonths.SelectedItem != null && cmbYears.SelectedItem != null)
+            {
+                Case selectedCase = (Case)cmbCase.SelectedItem;
 
-            RefreshPostageDataToGrid(postageDataGrid, cmbMonths.SelectedItem.ToString(), Convert.ToInt32(cmbYears.SelectedItem), selectedCase.CaseName);
+                RefreshPostageDataToGrid(postageDataGrid, cmbMonths.SelectedItem.ToString(), Convert.ToInt32(cmbYears.SelectedItem), selectedCase.CaseName);
 
-            exportAvailable = true;
+                exportAvailable = true;
+            }
+            else
+            {
+                MessageBox.Show("Parameters for report not set.");
+            }
         }
 
-        private void btnExportToCsv_Click(object sender, RoutedEventArgs e)
+    private void btnExportToCsv_Click(object sender, RoutedEventArgs e)
         {
             ExportToCSV(dt);
         }
