@@ -80,7 +80,7 @@ namespace WGUCapstoneProject.Models
             {
                 //Step 3 - Command
                 SqliteCommand command = new SqliteCommand();
-                command.CommandText = @$"SELECT * FROM PostageDBEntry WHERE strftime('%d', 'DateSent') = {selectedMonth.Month.ToString("d2")} AND {selectedCase.CaseName} = CaseName";
+                command.CommandText = @$"SELECT MailId, CaseName, LastName, OrganizationName, Cost, PostageTypeName, DateSent FROM PostageDBEntry WHERE strftime('%m', 'DateSent') = {selectedMonth.Month.ToString("d2")} AND {selectedCase.CaseName} = CaseName";
                 command.Connection = conn;
 
                 //Step 4 - Open connection
@@ -130,7 +130,7 @@ namespace WGUCapstoneProject.Models
                 command.Connection = conn;
                 command.CommandText =
                     $@"INSERT INTO Mail (DateSent, Cost, CaseId, PostageTypeId, OrganizationId, RecipientId) 
-                      VALUES ('{dateSent.ToString("yyyy-dd-MM")}', {cost}, {caseId}, {postageTypeId}, {organizationId}, {recipientId});";
+                      VALUES ('{dateSent.ToString("MM-dd-yyyy")}', {cost}, {caseId}, {postageTypeId}, {organizationId}, {recipientId});";
                 //Step 4 - Open the Connection
                 conn.Open();
                 //Step 5 - Execute the Command
@@ -167,3 +167,4 @@ namespace WGUCapstoneProject.Models
         }
     }
 }
+//date('%d/%M/%Y', DateSent)

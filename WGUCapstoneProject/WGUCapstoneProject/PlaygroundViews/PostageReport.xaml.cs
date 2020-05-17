@@ -36,9 +36,9 @@ namespace WGUCapstoneProject.PlaygroundViews
             months = new ObservableCollection<string>();
             foreach (Mail mail in mails)
             {
-                if (!months.Contains(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Day)))
+                if (!months.Contains(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Month)))
                 {
-                    months.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Day));
+                    months.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Month));
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace WGUCapstoneProject.PlaygroundViews
             {
                 conn.Open();
                 SQLiteCommand cmd = conn.CreateCommand();
-                cmd.CommandText = @$"SELECT * FROM PostageDBEntry WHERE strftime('%d', DateSent) = '{month}' AND strftime('%Y', DateSent) = '{selectedYear}' AND '{caseName}' = CaseName";
+                cmd.CommandText = @$"SELECT MailId, CaseName, LastName, OrganizationName, Cost, PostageTypeName, DateSent FROM PostageDBEntry WHERE substr(DateSent, 0, 3) = '{month}' AND substr(DateSent, 7, 4) = '{selectedYear}' AND CaseName = '{caseName}'";
                 using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn))
                 {
                     DataTable dataTable = new DataTable();

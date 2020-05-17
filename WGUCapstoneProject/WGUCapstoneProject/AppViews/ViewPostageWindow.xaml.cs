@@ -98,7 +98,7 @@ namespace WGUCapstoneProject.AppViews
             {
                 conn.Open();
                 SQLiteCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM PostageDBEntry ";
+                cmd.CommandText = "SELECT MailId, CaseName, LastName, OrganizationName, Cost, PostageTypeName, DateSent FROM PostageDBEntry ";
                 using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn))
                 {
                     DataTable dataTable = new DataTable();

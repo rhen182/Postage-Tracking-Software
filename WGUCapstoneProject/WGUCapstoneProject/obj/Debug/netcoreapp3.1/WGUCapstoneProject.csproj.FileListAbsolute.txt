@@ -53,3 +53,4 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.genruntimeconfig.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\LoginWindow.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\LoginWindow.baml
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csprojAssemblyReference.cache
