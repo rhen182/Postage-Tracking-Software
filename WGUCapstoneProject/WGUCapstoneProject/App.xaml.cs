@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using WGUCapstoneProject.AppViews;
+using WGUCapstoneProject.Models;
 using WGUCapstoneProject.PlaygroundViews;
 
 namespace WGUCapstoneProject
@@ -17,8 +18,10 @@ namespace WGUCapstoneProject
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
+            Navigator.StartupWindow(new ViewPostageWindow());
+
+            //Window viewPostageWindow = new ViewPostageWindow();
+            //viewPostageWindow.Show();
         }
     }
 }

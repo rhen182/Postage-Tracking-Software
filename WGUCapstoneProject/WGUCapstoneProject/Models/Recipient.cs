@@ -33,7 +33,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -78,7 +78,7 @@ namespace WGUCapstoneProject.Models
         public static void UpdateRecipientToDb(string firstName, string lastName)
         {
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
             using (conn)
@@ -94,7 +94,7 @@ namespace WGUCapstoneProject.Models
         public static void InsertRecipientToDb(string firstName, string lastName)
         {
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
             using (conn)

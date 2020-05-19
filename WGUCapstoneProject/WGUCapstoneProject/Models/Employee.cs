@@ -10,7 +10,7 @@ using WGUCapstoneProject.HelperClasses;
 
 namespace WGUCapstoneProject.Models
 {
-    public class Employee : PersonBase, IUser
+    public class Employee : PersonBase
     {
         public int UserId { get; set; }
         public string Username { get; set; }
@@ -33,7 +33,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -166,21 +166,6 @@ namespace WGUCapstoneProject.Models
             else
             {
                 return false;
-            }
-        }
-
-        public void Login(bool canLogin, LoginWindow loginWindow)
-        {
-            if (canLogin)
-            {
-                MessageBox.Show("Logged in");
-                ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-                loginWindow.Close(); //this.Close();
-                viewPostageWindow.Show();
-            }
-            else
-            {
-                MessageBox.Show("Incorrect Login");
             }
         }
     }

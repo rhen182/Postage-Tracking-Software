@@ -45,7 +45,7 @@ namespace WGUCapstoneProject.AppViews
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
             SQLiteConnection conn = new SQLiteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
             using (conn)
@@ -65,7 +65,7 @@ namespace WGUCapstoneProject.AppViews
                 Mail selectedMail = new Mail();
                 selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
                 SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
-                connStringBuilder.DataSource = SQLiteHelper.dbDir;
+                connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
                 SQLiteConnection conn = new SQLiteConnection();
                 conn.ConnectionString = connStringBuilder.ToString();
                 using (conn)
@@ -84,16 +84,9 @@ namespace WGUCapstoneProject.AppViews
             }
         }
 
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddPostageWindow addPostage = new AddPostageWindow();
-            Close();
-            addPostage.Show();
-        }
-
         public void RefreshPostageDataToGrid(DataGrid dataGrid)
         {
-            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.dbDir + ";");
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.DatabaseDirectory + ";");
             try
             {
                 conn.Open();
@@ -128,10 +121,8 @@ namespace WGUCapstoneProject.AppViews
                 postageTypeIndex = PostageType.PostageTypeObservableCollection().ToList().FindIndex(x => x.PostageTypeId == selectedMail.PostageTypeId);
                 organizationIndex = Organization.OrganizationObservableCollection().ToList().FindIndex(x => x.OrganizationId == selectedMail.OrganizationId);
 
-                ModifyPostageWindow modifyPostageWindow = new ModifyPostageWindow
-                    (caseIndex, organizationIndex, postageTypeIndex, selectedMail, selectedCase, selectedOrganization, selectedPostageType, selectedRecipient);
-                Close();
-                modifyPostageWindow.Show();
+                Navigator.NavigateToWindow(new ModifyPostageWindow
+                    (caseIndex, organizationIndex, postageTypeIndex, selectedMail, selectedCase, selectedOrganization, selectedPostageType, selectedRecipient));
             }
             else
             {
@@ -139,12 +130,13 @@ namespace WGUCapstoneProject.AppViews
             }
 
         }
-
-        private void btnGetReport_Click_1(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            PostageReport postageReport = new PostageReport();
-            Close();
-            postageReport.Show();
+            Navigator.NavigateToWindow(new AddPostageWindow());
+        }
+        private void btnGetReport_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.NavigateToWindow(new PostageReport());
         }
     }
 }

@@ -28,7 +28,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -71,7 +71,7 @@ namespace WGUCapstoneProject.Models
         {
             //Step 1 - The Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
 
             //Step 2 - The Connection
             SqliteConnection conn = new SqliteConnection();

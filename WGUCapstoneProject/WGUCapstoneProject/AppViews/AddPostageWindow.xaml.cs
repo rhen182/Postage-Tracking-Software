@@ -22,7 +22,6 @@ namespace WGUCapstoneProject.AppViews
     public partial class AddPostageWindow : Window
     {
         public ObservableCollection<Case> caseList { get; set; }
-        public ObservableCollection<Recipient> recipients { get; set; }
         public ObservableCollection<PostageType> postageTypes { get; set; }
         public ObservableCollection<Organization> organizations { get; set; }
 
@@ -82,9 +81,7 @@ namespace WGUCapstoneProject.AppViews
         }
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            ViewPostageWindow viewPostage = new ViewPostageWindow();
-            Close();
-            viewPostage.Show();
+            Navigator.NavigateToWindow(new ViewPostageWindow());
         }
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -149,7 +146,6 @@ namespace WGUCapstoneProject.AppViews
 
                 mail.OrganizationId = Organization.OrganizationObservableCollection().ToList().Max(x => x.OrganizationId);
                 counter++;
-                //MessageBox.Show("OrganizationId = " + mail.OrganizationId.ToString());
             }
             else
             {
@@ -190,9 +186,7 @@ namespace WGUCapstoneProject.AppViews
 
                 Mail.InsertPostageToDb(mail.DateSent, mail.Cost, mail.CaseId, mail.PostageTypeId, mail.OrganizationId, mail.RecipientId);
 
-                ViewPostageWindow viewPostageWindow = new ViewPostageWindow();
-                Close();
-                viewPostageWindow.Show();
+                Navigator.NavigateToWindow(new ViewPostageWindow());
             }
             else
             {

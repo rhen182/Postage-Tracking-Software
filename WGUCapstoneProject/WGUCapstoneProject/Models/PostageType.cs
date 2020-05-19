@@ -28,7 +28,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -70,7 +70,7 @@ namespace WGUCapstoneProject.Models
         public static void InsertPostageTypeToDb(string postageTypeName)
         {
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
             using (conn)

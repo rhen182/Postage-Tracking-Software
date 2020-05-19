@@ -63,7 +63,7 @@ namespace WGUCapstoneProject.PlaygroundViews
         {
             string month = DateTime.Parse("1" + selectedMonth + " 2008").Month.ToString("d2");
 
-            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.dbDir + ";");
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.DatabaseDirectory + ";");
             try
             {
                 conn.Open();

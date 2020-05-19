@@ -15,7 +15,6 @@ namespace WGUCapstoneProject.Models
         public int PostageTypeId { get; set; }
         public int OrganizationId { get; set; }
         public int RecipientId { get; set; }
-
         public static ObservableCollection<Mail> MailObservableCollection()
         {
             //Step 1 - define the observable collection
@@ -23,7 +22,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -71,7 +70,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -113,13 +112,12 @@ namespace WGUCapstoneProject.Models
                 return monthCaseMail;
             }
         }
-
         public static void InsertPostageToDb(DateTime dateSent, double cost, int caseId, int postageTypeId, int organizationId, int recipientId)
         {
             //Step 1 - The Connection String
             
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
             //Step 2 - The Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
@@ -141,7 +139,7 @@ namespace WGUCapstoneProject.Models
         public static void UpdatePostageToDb(int currentMailId, double newCost, int newCaseId, int newPostageTypeId, int newOrganizationId, int newRecipientId)
         {
             SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder();
-            connectionStringBuilder.DataSource = SQLiteHelper.dbDir;
+            connectionStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connectionStringBuilder.ToString();
             using (conn)
@@ -165,6 +163,9 @@ namespace WGUCapstoneProject.Models
                 command.ExecuteNonQuery();
             }
         }
+
+
+
+
     }
 }
-//date('%d/%M/%Y', DateSent)

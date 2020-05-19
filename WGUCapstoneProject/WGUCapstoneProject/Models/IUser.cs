@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WGUCapstoneProject.AppViews;
+﻿using System.Windows;
 
 namespace WGUCapstoneProject.Models
 {
@@ -11,6 +8,6 @@ namespace WGUCapstoneProject.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public bool CanLogin(string username, string password);
-        public void Login(bool canLogin, LoginWindow loginWindow);
+        public void Login(bool canLogin, Window loginWindow);
     }
 }
