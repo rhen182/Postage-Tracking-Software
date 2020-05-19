@@ -21,7 +21,7 @@
     <Compile Update="AppViews\ViewPostageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="PlaygroundViews\PostageReport.xaml.cs">
+    <Compile Update="AppViews\PostageReport.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <Page Update="AppViews\ViewPostageWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="PlaygroundViews\PostageReport.xaml">
+    <Page Update="AppViews\PostageReport.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

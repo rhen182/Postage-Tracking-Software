@@ -34,7 +34,6 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\AddPostageWindow.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\ModifyPostageWindow.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\ViewPostageWindow.g.cs
-F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\PlaygroundViews\PostageReport.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\App.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject_Content.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject_MarkupCompile.cache
@@ -42,7 +41,6 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\AddPostageWindow.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\ModifyPostageWindow.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\ViewPostageWindow.baml
-F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\PlaygroundViews\PostageReport.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.g.resources
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CoreCompileInputs.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.AssemblyInfoInputs.cache
@@ -54,3 +52,5 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\LoginWindow.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\LoginWindow.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csprojAssemblyReference.cache
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\PostageReport.g.cs
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\PostageReport.baml
