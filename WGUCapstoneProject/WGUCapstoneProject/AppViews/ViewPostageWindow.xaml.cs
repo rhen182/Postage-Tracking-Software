@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.IO;
 using WGUCapstoneProject.Models;
 using System.Data.SQLite;
 using System.Data;
@@ -36,6 +24,7 @@ namespace WGUCapstoneProject.AppViews
             InitializeComponent();
 
             RefreshPostageDataToGrid(postageDataGrid);
+
         }
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
@@ -45,12 +34,12 @@ namespace WGUCapstoneProject.AppViews
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+            connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
             SQLiteConnection conn = new SQLiteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
             using (conn)
             {
-                SQLiteCommand command = new SQLiteCommand();
+                System.Data.SQLite.SQLiteCommand command = new System.Data.SQLite.SQLiteCommand();
                 command.Connection = conn;
                 command.CommandText = @"DELETE FROM Mail; DELETE FROM LegalCase; DELETE FROM Organization; DELETE FROM PostageType; DELETE FROM Recipient; DELETE FROM sqlite_sequence;";
                 conn.Open();
@@ -65,12 +54,12 @@ namespace WGUCapstoneProject.AppViews
                 Mail selectedMail = new Mail();
                 selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
                 SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
-                connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+                connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
                 SQLiteConnection conn = new SQLiteConnection();
                 conn.ConnectionString = connStringBuilder.ToString();
                 using (conn)
                 {
-                    SQLiteCommand command = new SQLiteCommand();
+                    System.Data.SQLite.SQLiteCommand command = new System.Data.SQLite.SQLiteCommand();
                     command.Connection = conn;
                     command.CommandText = @"DELETE FROM Mail WHERE MailId = " + selectedMail.MailId + ";";
                     conn.Open();
@@ -86,22 +75,16 @@ namespace WGUCapstoneProject.AppViews
 
         public void RefreshPostageDataToGrid(DataGrid dataGrid)
         {
-            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.DatabaseDirectory + ";");
-            try
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteDBConnection.DatabaseDirectory + ";");
+            SQLiteCommand cmd = CustomSQLiteCommand.SelectStatement(SQLiteDBConnection.Connection, "MailId", "CaseName", "LastName", "OrganizationName", "Cost", "PostageTypeName", "DateSent", "PostageDBEntry");
+            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn);
+            DataTable dataTable = new DataTable();
+            using (dataAdapter)
             {
                 conn.Open();
-                SQLiteCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT MailId, CaseName, LastName, OrganizationName, Cost, PostageTypeName, DateSent FROM PostageDBEntry ";
-                using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn))
-                {
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
-                    dataGrid.ItemsSource = dataTable.AsDataView();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                dataAdapter.Fill(dataTable);
+                dataGrid.ItemsSource = dataTable.AsDataView();
+                conn.Close();
             }
         }
 

@@ -18,7 +18,7 @@ namespace WGUCapstoneProject
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Navigator.StartupWindow(new ViewPostageWindow());
+            Navigator.ShowWindow(new ViewPostageWindow());
 
             //Window viewPostageWindow = new ViewPostageWindow();
             //viewPostageWindow.Show();

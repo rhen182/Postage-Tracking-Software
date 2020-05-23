@@ -33,7 +33,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+            connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -81,7 +81,7 @@ namespace WGUCapstoneProject.Models
         public static void InsertOrganizationToDb(string organizationName, string addressLine1, string addressLine2, string city, string state, string zip)
         {
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+            connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
             using (conn)

@@ -22,7 +22,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+            connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -70,7 +70,7 @@ namespace WGUCapstoneProject.Models
 
             //Step 2 - Connection String
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+            connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
 
             //Step 2.5 - Connection
             SqliteConnection conn = new SqliteConnection();
@@ -117,7 +117,7 @@ namespace WGUCapstoneProject.Models
             //Step 1 - The Connection String
             
             SqliteConnectionStringBuilder connStringBuilder = new SqliteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+            connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
             //Step 2 - The Connection
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connStringBuilder.ToString();
@@ -139,7 +139,7 @@ namespace WGUCapstoneProject.Models
         public static void UpdatePostageToDb(int currentMailId, double newCost, int newCaseId, int newPostageTypeId, int newOrganizationId, int newRecipientId)
         {
             SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder();
-            connectionStringBuilder.DataSource = SQLiteHelper.DatabaseDirectory;
+            connectionStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
             SqliteConnection conn = new SqliteConnection();
             conn.ConnectionString = connectionStringBuilder.ToString();
             using (conn)

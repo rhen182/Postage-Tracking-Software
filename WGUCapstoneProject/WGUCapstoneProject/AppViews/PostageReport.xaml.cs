@@ -63,11 +63,11 @@ namespace WGUCapstoneProject.PlaygroundViews
         {
             string month = DateTime.Parse("1" + selectedMonth + " 2008").Month.ToString("d2");
 
-            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteHelper.DatabaseDirectory + ";");
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteDBConnection.DatabaseDirectory + ";");
             try
             {
                 conn.Open();
-                SQLiteCommand cmd = conn.CreateCommand();
+                System.Data.SQLite.SQLiteCommand cmd = conn.CreateCommand();
                 cmd.CommandText = @$"SELECT MailId, CaseName, LastName, OrganizationName, Cost, PostageTypeName, DateSent FROM PostageDBEntry WHERE substr(DateSent, 0, 3) = '{month}' AND substr(DateSent, 7, 4) = '{selectedYear}' AND CaseName = '{caseName}'";
                 using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn))
                 {
