@@ -19,81 +19,59 @@ namespace WGUCapstoneProject.AppViews
         public int caseIndex;
         public int organizationIndex;
 
+        //Constructor
         public ViewPostageWindow()
         {
             InitializeComponent();
-
-            RefreshPostageDataToGrid(postageDataGrid);
-
+            RefreshPostageDataToGrid(mailDataGrid);
         }
-        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+
+        //Window Methods
+        public void RefreshPostageDataToGrid(DataGrid dataGrid)
         {
-            RefreshPostageDataToGrid(postageDataGrid);
+            SQLiteCommand command = CustomSQLiteCommand.SelectStatement(SQLiteDBConnection.Connection, "MailId", "CaseName", "LastName", "OrganizationName", "Cost", "PostageTypeName", "DateSent", "PostageDBEntry");
+            DatagridController datagridController = new DatagridController(command, SQLiteDBConnection.Connection);
+            datagridController.FillDataGrid(dataGrid, datagridController.Command);
+        }
+        public void DeleteSelectedPostage(DataGrid dataGrid)
+        {
+            SQLiteCommand command = CustomSQLiteCommand.DeleteFromTableStatement(SQLiteDBConnection.Connection, "Mail", DatagridController.GetSelectedId(dataGrid));
+            CustomSQLiteCommand.DeleteFromTable(command);
+        }
+        private void BtnDeleteAll_Click(object sender, RoutedEventArgs e)
+        {
+            CustomSQLiteCommand.TruncateTable("Mail", "LegalCase", "Organization", "PostageType", "Recipient");
+            RefreshPostageDataToGrid(mailDataGrid);
         }
 
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
-            connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
-            SQLiteConnection conn = new SQLiteConnection();
-            conn.ConnectionString = connStringBuilder.ToString();
-            using (conn)
-            {
-                System.Data.SQLite.SQLiteCommand command = new System.Data.SQLite.SQLiteCommand();
-                command.Connection = conn;
-                command.CommandText = @"DELETE FROM Mail; DELETE FROM LegalCase; DELETE FROM Organization; DELETE FROM PostageType; DELETE FROM Recipient; DELETE FROM sqlite_sequence;";
-                conn.Open();
-                command.ExecuteNonQuery();
-                RefreshPostageDataToGrid(postageDataGrid);
-            }
-        }
+        //Button Click Events
         private void BtnDeleteOne_Click(object sender, RoutedEventArgs e)
         {
-            if (postageDataGrid.SelectedItem != null)
+            if (mailDataGrid.SelectedItem != null)
             {
-                Mail selectedMail = new Mail();
-                selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
-                SQLiteConnectionStringBuilder connStringBuilder = new SQLiteConnectionStringBuilder();
-                connStringBuilder.DataSource = SQLiteDBConnection.DatabaseDirectory;
-                SQLiteConnection conn = new SQLiteConnection();
-                conn.ConnectionString = connStringBuilder.ToString();
-                using (conn)
-                {
-                    System.Data.SQLite.SQLiteCommand command = new System.Data.SQLite.SQLiteCommand();
-                    command.Connection = conn;
-                    command.CommandText = @"DELETE FROM Mail WHERE MailId = " + selectedMail.MailId + ";";
-                    conn.Open();
-                    command.ExecuteNonQuery();
-                    RefreshPostageDataToGrid(postageDataGrid);
-                }
+                DeleteSelectedPostage(mailDataGrid);
+                RefreshPostageDataToGrid(mailDataGrid);
             }
             else
             {
                 MessageBox.Show("Please select a postage entry to delete.");
             }
         }
-
-        public void RefreshPostageDataToGrid(DataGrid dataGrid)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteDBConnection.DatabaseDirectory + ";");
-            SQLiteCommand cmd = CustomSQLiteCommand.SelectStatement(SQLiteDBConnection.Connection, "MailId", "CaseName", "LastName", "OrganizationName", "Cost", "PostageTypeName", "DateSent", "PostageDBEntry");
-            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn);
-            DataTable dataTable = new DataTable();
-            using (dataAdapter)
-            {
-                conn.Open();
-                dataAdapter.Fill(dataTable);
-                dataGrid.ItemsSource = dataTable.AsDataView();
-                conn.Close();
-            }
+            Navigator.NavigateToWindow(new AddPostageWindow());
+        }
+        private void btnGetReport_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.NavigateToWindow(new PostageReport());
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-            if (postageDataGrid.SelectedItem != null)
+            if (mailDataGrid.SelectedItem != null)
             {
                 Mail selectedMail = new Mail();
-                selectedMail.MailId = Convert.ToInt32(((DataRowView)postageDataGrid.SelectedValue)[0]);
+                selectedMail.MailId = Convert.ToInt32(((DataRowView)mailDataGrid.SelectedValue)[0]);
                 selectedMail = Mail.MailObservableCollection().ToList().Find(x => x.MailId == selectedMail.MailId);
                 Case selectedCase = Case.CaseObservableCollection().ToList().Find(x => x.CaseId == selectedMail.CaseId);
                 Organization selectedOrganization = Organization.OrganizationObservableCollection().ToList().Find(x => x.OrganizationId == selectedMail.OrganizationId);
@@ -113,13 +91,6 @@ namespace WGUCapstoneProject.AppViews
             }
 
         }
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            Navigator.NavigateToWindow(new AddPostageWindow());
-        }
-        private void btnGetReport_Click(object sender, RoutedEventArgs e)
-        {
-            Navigator.NavigateToWindow(new PostageReport());
-        }
+
     }
 }

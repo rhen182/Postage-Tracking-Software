@@ -26,7 +26,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-    <DataGrid Name="postageDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.RowSpan="1"
+    <DataGrid Name="mailDataGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.RowSpan="1"
                     Grid.Row="3" Grid.ColumnSpan="3" AreRowDetailsFrozen="True" CanUserAddRows="False"
                     HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
                     SelectionMode="Single" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3">
@@ -68,19 +68,11 @@
         ></Button>
         <Button
             Grid.Column="2" Grid.Row="2"
-            x:Name="btnDelete"
+            x:Name="btnDeleteAll"
             Content="Delete All Postage"
-            Click="BtnDelete_Click"
+            Click="BtnDeleteAll_Click"
             Margin="3"
             Visibility="Visible"
-        ></Button>
-        <!--Row 3-->
-        <Button
-            Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="1"
-            x:Name="btnRefresh"
-            Content="Refresh Postage"
-            Click="BtnRefresh_Click"
-            Margin="3"
         ></Button>
     </Grid>
 </Window>

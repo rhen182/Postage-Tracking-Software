@@ -13,7 +13,7 @@ namespace WGUCapstoneProject.HelperClasses
     public class SQLiteDBConnection
     {
         //Hard coded, will probably want to make databaseName and DatabaseDirectory browseable
-        private static readonly string databaseName = "Postage.db";
+        private static readonly string databaseName = "PostageDB.db";
         public static string DatabaseDirectory
         {
             get

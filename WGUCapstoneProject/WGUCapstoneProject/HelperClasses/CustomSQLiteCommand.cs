@@ -1,9 +1,157 @@
 ﻿using System.Data.SQLite;
+using System.Windows.Controls;
 
 namespace WGUCapstoneProject.HelperClasses
 {
     class CustomSQLiteCommand
     {
+        #region Delete table entry methods
+        public static SQLiteCommand DeleteFromTableStatement(SQLiteConnection connection, string tableName, int deletedValueId)
+        {
+            SQLiteCommand command = new SQLiteCommand();
+            command.CommandText = $"DELETE FROM {tableName} WHERE {tableName}Id = {deletedValueId}";
+            return command;
+        }
+
+        public static void DeleteFromTable(SQLiteCommand command)
+        {
+            using (SQLiteConnection conn = SQLiteDBConnection.Connection)
+            {
+                command.Connection = conn;
+                conn.Open();
+                command.ExecuteNonQuery();
+                command = null;
+                conn.Close();
+            }
+        }
+        #endregion
+        #region Methods for truncating more than one table at a time - public void ClearTables(string tableName1, ..., string tableNameN) 
+        /// <summary>
+        /// SQLite truncate table one table
+        /// </summary>
+        public static SQLiteCommand TruncateTableStatement(SQLiteConnection connection, string tableName)
+        {
+            SQLiteCommand command = new SQLiteCommand();
+            command.Connection = connection;
+            command.CommandText = $"DELETE FROM {tableName}";
+            return command;
+        }
+
+        /// <summary>
+        /// Truncate one table
+        /// </summary>
+        public static void TruncateTable(string table1)
+        {
+            using (SQLiteConnection conn = SQLiteDBConnection.Connection)
+            {
+                conn.Open();
+                SQLiteCommand cmd = TruncateTableStatement(conn, table1);
+                cmd.ExecuteNonQuery();
+                cmd = null;
+                conn.Close();
+            }
+        }
+        /// <summary>
+        /// Truncate two tables
+        /// </summary>
+        public static void TruncateTable(string table1, string table2)
+        {
+            using (SQLiteConnection conn = SQLiteDBConnection.Connection)
+            {
+                conn.Open();
+                SQLiteCommand cmd = TruncateTableStatement(conn, table1);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table2);
+                cmd.ExecuteNonQuery();
+                cmd = null;
+                conn.Close();
+            }
+        }
+        /// <summary>
+        /// Truncate three tables
+        /// </summary>
+        public static void TruncateTable(string table1, string table2, string table3)
+        {
+            using (SQLiteConnection conn = SQLiteDBConnection.Connection)
+            {
+                conn.Open();
+                SQLiteCommand cmd = TruncateTableStatement(conn, table1);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table2);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table3);
+                cmd.ExecuteNonQuery();
+                cmd = null;
+                conn.Close();
+            }
+        }
+        /// <summary>
+        /// Truncate four tables
+        /// </summary>
+        public static void TruncateTable(string table1, string table2, string table3, string table4)
+        {
+            using (SQLiteConnection conn = SQLiteDBConnection.Connection)
+            {
+                conn.Open();
+                SQLiteCommand cmd = TruncateTableStatement(conn, table1);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table2);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table3);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table4);
+                cmd.ExecuteNonQuery();
+                cmd = null;
+                conn.Close();
+            }
+        }
+        /// <summary>
+        /// Truncate five tables
+        /// </summary>
+        public static void TruncateTable(string table1, string table2, string table3, string table4, string table5)
+        {
+            using (SQLiteConnection conn = SQLiteDBConnection.Connection)
+            {
+                conn.Open();
+                SQLiteCommand cmd = TruncateTableStatement(conn, table1);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table2);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table3);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table4);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table5);
+                cmd.ExecuteNonQuery();
+                cmd = null;
+                conn.Close();
+            }
+        }
+        /// <summary>
+        /// Truncate six tables
+        /// </summary>
+        public void TruncateTable(string table1, string table2, string table3, string table4, string table5, string table6)
+        {
+            using (SQLiteConnection conn = SQLiteDBConnection.Connection)
+            {
+                conn.Open();
+                SQLiteCommand cmd = TruncateTableStatement(conn, table1);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table2);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table3);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table4);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table5);
+                cmd.ExecuteNonQuery();
+                cmd = TruncateTableStatement(conn, table6);
+                cmd.ExecuteNonQuery();
+                cmd = null;
+                conn.Close();
+            }
+        }
+        #endregion
         #region Select all statement methods
         public static SQLiteCommand SelectAllStatement(SQLiteConnection connection, string tableName)
         {
@@ -11,9 +159,8 @@ namespace WGUCapstoneProject.HelperClasses
             command.CommandText = $"SELECT * FROM {tableName}";
             command.Connection = connection;
             return command;
-        } 
+        }
         #endregion
-
         #region Select statement with specific columns methods
         /// <summary>
         /// SQLite select statement with one column

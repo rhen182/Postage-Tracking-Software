@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Windows.Controls;
 using WGUCapstoneProject.HelperClasses;
 
 namespace WGUCapstoneProject.Models
@@ -165,6 +167,11 @@ namespace WGUCapstoneProject.Models
         }
 
 
+        public static int GetSelectedMailId(DataGrid mailDataGrid)
+        {
+            int selectedMailId = Convert.ToInt32(((DataRowView)mailDataGrid.SelectedValue)[0]);
+            return selectedMailId;
+        }
 
 
     }
