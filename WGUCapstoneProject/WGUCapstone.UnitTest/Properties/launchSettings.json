@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "WGUCapstone.UnitTest": {
-      "commandName": "Project",
-      "workingDirectory": "F:\\Documents\\GithubRepo\\WGU Capstone\\WGUCapstone\\WGUCapstoneProject\\WGUCapstoneProject"
-    }
-  }
-}
