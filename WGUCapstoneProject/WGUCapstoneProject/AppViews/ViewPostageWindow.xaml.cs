@@ -15,19 +15,15 @@ namespace WGUCapstoneProject.AppViews
     /// </summary>
     public partial class ViewPostageWindow : Window
     {
-        public int postageTypeIndex;
-        public int caseIndex;
-        public int organizationIndex;
-
         //Constructor
         public ViewPostageWindow()
         {
             InitializeComponent();
-            RefreshPostageDataToGrid(mailDataGrid);
+            LoadPostageDataToGrid(mailDataGrid);
         }
 
         //Window Methods
-        public void RefreshPostageDataToGrid(DataGrid dataGrid)
+        public void LoadPostageDataToGrid(DataGrid dataGrid)
         {
             SQLiteCommand command = CustomSQLiteCommand.SelectStatement(SQLiteDBConnection.Connection, "MailId", "CaseName", "LastName", "OrganizationName", "Cost", "PostageTypeName", "DateSent", "PostageDBEntry");
             DatagridController datagridController = new DatagridController(command, SQLiteDBConnection.Connection);
@@ -41,7 +37,7 @@ namespace WGUCapstoneProject.AppViews
         private void BtnDeleteAll_Click(object sender, RoutedEventArgs e)
         {
             CustomSQLiteCommand.TruncateTable("Mail", "LegalCase", "Organization", "PostageType", "Recipient");
-            RefreshPostageDataToGrid(mailDataGrid);
+            LoadPostageDataToGrid(mailDataGrid);
         }
 
         //Button Click Events
@@ -50,7 +46,7 @@ namespace WGUCapstoneProject.AppViews
             if (mailDataGrid.SelectedItem != null)
             {
                 DeleteSelectedPostage(mailDataGrid);
-                RefreshPostageDataToGrid(mailDataGrid);
+                LoadPostageDataToGrid(mailDataGrid);
             }
             else
             {
@@ -70,6 +66,9 @@ namespace WGUCapstoneProject.AppViews
         {
             if (mailDataGrid.SelectedItem != null)
             {
+                int postageTypeIndex;
+                int caseIndex;
+                int organizationIndex;
                 Mail selectedMail = new Mail();
                 selectedMail.MailId = Convert.ToInt32(((DataRowView)mailDataGrid.SelectedValue)[0]);
                 selectedMail = Mail.MailObservableCollection().ToList().Find(x => x.MailId == selectedMail.MailId);
@@ -89,8 +88,6 @@ namespace WGUCapstoneProject.AppViews
             {
                 MessageBox.Show("Please select a postage entry.");
             }
-
         }
-
     }
 }
