@@ -62,5 +62,13 @@
                 <DataGridTextColumn Header="Date Sent" Binding="{Binding DateSent}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <DataGrid Name="postageTotalGrid" AutoGenerateColumns="false" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" AreRowDetailsFrozen="True" CanUserAddRows="False" HeadersVisibility="Column" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserReorderColumns="False" SelectionMode="Extended" AlternatingRowBackground="AliceBlue" IsReadOnly="True" Margin="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Case" Binding="{Binding 'Case'}"/>
+                <DataGridTextColumn Header="Month Sent" Binding="{Binding 'MonthSent'}"/>
+                <DataGridTextColumn Header="Year Sent" Binding="{Binding 'YearSent'}"/>
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding Total}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

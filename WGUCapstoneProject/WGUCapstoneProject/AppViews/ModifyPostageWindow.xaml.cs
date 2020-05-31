@@ -334,5 +334,10 @@ namespace WGUCapstoneProject.AppViews
                 txtZip.SelectAll();
             }
         }
+
+        private void txtNewRecipientFirstName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

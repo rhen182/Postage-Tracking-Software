@@ -29,7 +29,6 @@ namespace WGUCapstoneProject.PlaygroundViews
         public PostageReport()
         {
             InitializeComponent();
-            //RefreshPostageDataToGrid(postageDataGrid);
             cases = Case.CaseObservableCollection();
             mails = Mail.MailObservableCollection();
             years = new ObservableCollection<int>();
@@ -40,17 +39,9 @@ namespace WGUCapstoneProject.PlaygroundViews
                 {
                     months.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mail.DateSent.Month));
                 }
-                else
-                {
-                    continue;
-                }
                 if (!years.Contains(mail.DateSent.Year))
                 {
                     years.Add(mail.DateSent.Year);
-                }
-                else
-                {
-                    continue;
                 }
             }
             cmbMonths.ItemsSource = months;
@@ -81,8 +72,31 @@ namespace WGUCapstoneProject.PlaygroundViews
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        public void RefreshPostageTotalToGrid(DataGrid dataGrid, string selectedMonth, int selectedYear, string caseName)
+        {
+            string month = DateTime.Parse("1" + selectedMonth + " 2009").Month.ToString("d2");
 
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + SQLiteDBConnection.DatabaseDirectory + ";");
+            try
+            {
+                conn.Open();
+                SQLiteCommand cmd = conn.CreateCommand();
+                cmd.CommandText = $"SELECT \"Case\", \"Month Sent\" AS MonthSent, \"Year Sent\" AS YearSent, \"Total\" FROM SummaryView WHERE \"Month Sent\" = \"{month}\" AND \"Year Sent\" = \"{selectedYear.ToString()}\" AND \"Case\" = \"{caseName}\"";
+                using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn))
+                {
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+                    dataGrid.ItemsSource = dataTable.AsDataView();
+                    dt = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
@@ -92,6 +106,8 @@ namespace WGUCapstoneProject.PlaygroundViews
                 Case selectedCase = (Case)cmbCase.SelectedItem;
 
                 RefreshPostageDataToGrid(postageDataGrid, cmbMonths.SelectedItem.ToString(), Convert.ToInt32(cmbYears.SelectedItem), selectedCase.CaseName);
+
+                RefreshPostageTotalToGrid(postageTotalGrid, cmbMonths.SelectedItem.ToString(), Convert.ToInt32(cmbYears.SelectedItem), selectedCase.CaseName);
 
                 exportAvailable = true;
             }
@@ -133,6 +149,14 @@ namespace WGUCapstoneProject.PlaygroundViews
             ViewPostageWindow view = new ViewPostageWindow();
             Close();
             view.Show();
+        }
+
+        private void txtCsvName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(txtCsvName != null)
+            {
+                txtCsvName.SelectAll();
+            }
         }
     }
 }
