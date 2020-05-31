@@ -27,6 +27,18 @@
           "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {}
         }
       },
+      "Ookii.Dialogs.Wpf.NETCore/2.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App"
+        ]
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
         "type": "package",
         "dependencies": {
@@ -208,6 +220,21 @@
         "microsoft.data.sqlite.core.nuspec"
       ]
     },
+    "Ookii.Dialogs.Wpf.NETCore/2.1.0": {
+      "sha512": "f2aBysqciLkGT9c3JuqV3H5jodvZ6x0sWT5b2Uuq6ZTlTY43v1Nr1J7J7jbNHhV0WFkkF1KngnjGjha5mJCvuA==",
+      "type": "package",
+      "path": "ookii.dialogs.wpf.netcore/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "LICENSE.md",
+        "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.dll",
+        "ookii-dialogs-wpf-nuget.png",
+        "ookii.dialogs.wpf.netcore.2.1.0.nupkg.sha512",
+        "ookii.dialogs.wpf.netcore.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
       "sha512": "OVPI/nh5AqfLCIKhAYqjCa6AHhc7oKApGcGM3UhMRSerFiBx58nSpGwxVFdMgjOCWZR+fA49nzsnKlWp5hFo8w==",
       "type": "package",
@@ -342,6 +369,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Microsoft.Data.Sqlite >= 5.0.0-preview.3.20181.2",
+      "Ookii.Dialogs.Wpf.NETCore >= 2.1.0",
       "System.Data.SQLite.Core >= 1.0.112.2"
     ]
   },
@@ -393,6 +421,10 @@
             "target": "Package",
             "version": "[5.0.0-preview.3.20181.2, )"
           },
+          "Ookii.Dialogs.Wpf.NETCore": {
+            "target": "Package",
+            "version": "[2.1.0, )"
+          },
           "System.Data.SQLite.Core": {
             "target": "Package",
             "version": "[1.0.112.2, )"
@@ -411,6 +443,9 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App": {
+            "privateAssets": "none"
           },
           "Microsoft.WindowsDesktop.App.WPF": {
             "privateAssets": "none"

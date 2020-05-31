@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -12,6 +13,7 @@ using System.Windows.Controls;
 using WGUCapstoneProject.AppViews;
 using WGUCapstoneProject.HelperClasses;
 using WGUCapstoneProject.Models;
+using Ookii.Dialogs.Wpf;
 
 namespace WGUCapstoneProject.PlaygroundViews
 {
@@ -24,7 +26,8 @@ namespace WGUCapstoneProject.PlaygroundViews
         ObservableCollection<string> months { get; set; }
         ObservableCollection<int> years { get; set; }
         ObservableCollection<Case> cases { get; set; }
-        DataTable dt { get; set; }
+        DataTable dt1 { get; set; }
+        DataTable dt2 { get; set; }
         bool exportAvailable = false;
         public PostageReport()
         {
@@ -58,14 +61,14 @@ namespace WGUCapstoneProject.PlaygroundViews
             try
             {
                 conn.Open();
-                System.Data.SQLite.SQLiteCommand cmd = conn.CreateCommand();
+                SQLiteCommand cmd = conn.CreateCommand();
                 cmd.CommandText = @$"SELECT MailId, CaseName, LastName, OrganizationName, Cost, PostageTypeName, DateSent FROM PostageDBEntry WHERE substr(DateSent, 0, 3) = '{month}' AND substr(DateSent, 7, 4) = '{selectedYear}' AND CaseName = '{caseName}'";
                 using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(cmd.CommandText, conn))
                 {
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
                     dataGrid.ItemsSource = dataTable.AsDataView();
-                    dt = dataTable;
+                    dt1 = dataTable;
                 }
             }
             catch (Exception ex)
@@ -89,7 +92,7 @@ namespace WGUCapstoneProject.PlaygroundViews
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
                     dataGrid.ItemsSource = dataTable.AsDataView();
-                    dt = dataTable;
+                    dt2 = dataTable;
                 }
             }
             catch (Exception ex)
@@ -117,9 +120,9 @@ namespace WGUCapstoneProject.PlaygroundViews
             }
         }
 
-    private void btnExportToCsv_Click(object sender, RoutedEventArgs e)
+        private void btnExportToCsv_Click(object sender, RoutedEventArgs e)
         {
-            ExportToCSV(dt);
+            ExportTotalToCSV(dt1, dt2);
         }
 
         public void ExportToCSV(DataTable dataTable)
@@ -143,6 +146,59 @@ namespace WGUCapstoneProject.PlaygroundViews
                 MessageBox.Show("A report has not been generated.");
             }
         }
+        public void ExportTotalToCSV(DataTable dt1, DataTable dt2)
+        {
+            if (exportAvailable == true)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Postage List");
+                foreach (DataRow row in dt1.Rows)
+                {
+                    IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                    sb.AppendLine(string.Join(",", fields));
+                }
+                sb.Append(",");
+                sb.Append(",");
+                sb.Append(",");
+                sb.Append("Total Cost: ,");
+                foreach (DataRow row in dt2.Rows)
+                {
+                    IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                    sb.AppendLine(fields.ToArray()[3]);
+                }
+
+
+                VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog();
+                dialog.ShowDialog();
+                string selectedDir = dialog.SelectedPath;
+                MessageBox.Show(selectedDir);
+                if(!String.IsNullOrWhiteSpace(selectedDir))
+                {
+                    string fileName = $"{txtCsvName.Text}.csv";
+                    if (txtCsvName.Text == "Enter Exported Report Name")
+                    {
+                        foreach (DataRow row in dt2.Rows)
+                        {
+                            IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                            fileName = "Postage_" + fields.ToArray()[0] + "_" + fields.ToArray()[1] + "-" + fields.ToArray()[2] + ".csv";
+                        }
+                    }
+                    string fileDir = Convert.ToString(@$"{selectedDir}\{fileName}");
+                    File.WriteAllText(fileDir, sb.ToString());
+                    MessageBox.Show("A report has been generated.");
+                }
+                else
+                {
+                    MessageBox.Show("Please choose a place to save the file.");
+                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("A report has not been generated.");
+            }
+        }
+
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

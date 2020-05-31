@@ -42,7 +42,7 @@
         <Button
             x:Name="btnLoad" Grid.Column="4" Grid.RowSpan="1" Grid.Row="1" Content="Load Report" Margin="3" Click="btnLoad_Click" MinWidth="75"
         ></Button>
-        <TextBox x:Name="txtCsvName" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" Margin="3" Text="Enter Exported Report Name" TextAlignment="Center"></TextBox>
+        <TextBox x:Name="txtCsvName" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" Margin="3" Text="Enter Exported Report Name" TextAlignment="Center" GotFocus="txtCsvName_GotFocus"></TextBox>
 
 
         <Button

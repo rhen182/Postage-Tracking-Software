@@ -9,6 +9,7 @@
       "WGUCapstoneProject/1.0.0": {
         "dependencies": {
           "Microsoft.Data.Sqlite": "5.0.0-preview.3.20181.2",
+          "Ookii.Dialogs.Wpf.NETCore": "2.1.0",
           "System.Data.SQLite.Core": "1.0.112.2"
         },
         "runtime": {
@@ -29,6 +30,14 @@
           "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.0.20.18102"
+          }
+        }
+      },
+      "Ookii.Dialogs.Wpf.NETCore/2.1.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.dll": {
+            "assemblyVersion": "2.1.20100.0",
+            "fileVersion": "2.0.20100.0"
           }
         }
       },
@@ -207,6 +216,13 @@
       "sha512": "sha512-mU0uSBlzWn7W9Z7UH5EiDbsvgG/Am/kOCR8e7nB3SCUI4kviLNemqNy790u3DFZBOvZySjHEN36vWP2bnxdmxw==",
       "path": "microsoft.data.sqlite.core/5.0.0-preview.3.20181.2",
       "hashPath": "microsoft.data.sqlite.core.5.0.0-preview.3.20181.2.nupkg.sha512"
+    },
+    "Ookii.Dialogs.Wpf.NETCore/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f2aBysqciLkGT9c3JuqV3H5jodvZ6x0sWT5b2Uuq6ZTlTY43v1Nr1J7J7jbNHhV0WFkkF1KngnjGjha5mJCvuA==",
+      "path": "ookii.dialogs.wpf.netcore/2.1.0",
+      "hashPath": "ookii.dialogs.wpf.netcore.2.1.0.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
       "type": "package",

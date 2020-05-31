@@ -42,7 +42,6 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\ModifyPostageWindow.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\ViewPostageWindow.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.g.resources
-F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CoreCompileInputs.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.AssemblyInfoInputs.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.AssemblyInfo.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CopyComplete
@@ -52,3 +51,5 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\PostageReport.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\AppViews\PostageReport.baml
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csprojAssemblyReference.cache
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\bin\Debug\netcoreapp3.1\Ookii.Dialogs.Wpf.dll
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Debug\netcoreapp3.1\WGUCapstoneProject.csproj.CoreCompileInputs.cache

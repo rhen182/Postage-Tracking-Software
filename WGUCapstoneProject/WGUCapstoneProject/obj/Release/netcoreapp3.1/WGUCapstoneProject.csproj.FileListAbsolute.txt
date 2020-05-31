@@ -52,3 +52,4 @@ F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneP
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Release\netcoreapp3.1\WGUCapstoneProject.csprojAssemblyReference.cache
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Release\netcoreapp3.1\AppViews\PostageReport.g.cs
 F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\obj\Release\netcoreapp3.1\AppViews\PostageReport.baml
+F:\Documents\GithubRepo\WGU Capstone\WGUCapstone\WGUCapstoneProject\WGUCapstoneProject\bin\Release\netcoreapp3.1\Ookii.Dialogs.Wpf.dll

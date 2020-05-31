@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "u2QXjWr51MqnfEnrZlNyPK/imSAXL+bKKIeHSKvZ7QSvbWJ2nLu8pHNPKIEBv5jAN7FWjp/G7hPgqk+oVpuNXg==",
+  "dgSpecHash": "tAmiuxCV3VIWm0ZoiGTv9/ByP0Yw9bv9DPVT9OJYTwcAP1NsQQOuWhKb8d/z4yDfAPxlH5nX8dRLyj+kwG7mWw==",
   "success": true,
   "projectFilePath": "F:\\Documents\\GithubRepo\\WGU Capstone\\WGUCapstone\\WGUCapstoneProject\\WGUCapstoneProject\\WGUCapstoneProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Christian\\.nuget\\packages\\microsoft.data.sqlite\\5.0.0-preview.3.20181.2\\microsoft.data.sqlite.5.0.0-preview.3.20181.2.nupkg.sha512",
     "C:\\Users\\Christian\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.0-preview.3.20181.2\\microsoft.data.sqlite.core.5.0.0-preview.3.20181.2.nupkg.sha512",
+    "C:\\Users\\Christian\\.nuget\\packages\\ookii.dialogs.wpf.netcore\\2.1.0\\ookii.dialogs.wpf.netcore.2.1.0.nupkg.sha512",
     "C:\\Users\\Christian\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.2\\sqlitepclraw.bundle_e_sqlite3.2.0.2.nupkg.sha512",
     "C:\\Users\\Christian\\.nuget\\packages\\sqlitepclraw.core\\2.0.2\\sqlitepclraw.core.2.0.2.nupkg.sha512",
     "C:\\Users\\Christian\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.2\\sqlitepclraw.lib.e_sqlite3.2.0.2.nupkg.sha512",
