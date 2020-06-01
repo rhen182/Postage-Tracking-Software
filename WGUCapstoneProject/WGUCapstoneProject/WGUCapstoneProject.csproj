@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <StartupObject></StartupObject>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +22,12 @@
     <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.0-preview.3.20181.2" />
     <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.1.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
